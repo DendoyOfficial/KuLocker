@@ -1,171 +1,607 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-  <title>Kulocker</title>
-
-  <!-- Google Font -->
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Kulocker — Secure Smart Locker for Modern Delivery</title>
 
   <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800&display=swap"
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
     rel="stylesheet"
-  >
+  />
 
-  <!-- External CSS -->
-  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="style.css" />
 </head>
-
 <body>
 
-  <!-- HEADER -->
-  <header>
-    <div class="container">
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="nav-logo">
+      <div class="nav-logo-icon">
+        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round">
+          <rect width="18" height="11" x="3" y="11" rx="2" ry="2"/>
+          <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+        </svg>
+      </div>
+      <span class="nav-logo-text">Kulocker</span>
+    </a>
 
-      <nav>
-
-        <div class="logo">
-          <img src="assets/logo.png" alt="Kulocker Logo">
-        </div>
-
-        <div class="nav-links">
-          <a href="#">Home</a>
-          <a href="#">Features</a>
-          <a href="#">About</a>
-          <a href="#">Contact</a>
-        </div>
-
-        <button class="btn btn-secondary">
-          Get Started
-        </button>
-
-      </nav>
-
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Features</a>
+      <a href="#product">Product</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#faq">FAQ</a>
     </div>
-  </header>
 
-  <!-- HERO -->
-  <section class="hero">
+    <button class="btn-gold" style="display:none" id="navCta">
+      Get Started
+    </button>
 
-    <div class="container hero-grid">
+    <button class="hamburger" id="hamburger" aria-label="Toggle menu">
+      <span></span>
+      <span></span>
+      <span></span>
+    </button>
 
-      <div class="hero-content">
+    <button class="btn-gold" id="navCtaDesk">Get Started</button>
+  </div>
+</nav>
 
-        <h1>
-          Smart Locker
-          <span>For Modern Delivery</span>
+<div class="mobile-menu" id="mobileMenu">
+  <a href="#features" class="mobile-nav-link">Features</a>
+  <a href="#product" class="mobile-nav-link">Product</a>
+  <a href="#pricing" class="mobile-nav-link">Pricing</a>
+  <a href="#faq" class="mobile-nav-link">FAQ</a>
+
+  <button class="btn-gold" style="width:100%;margin-top:.5rem">
+    Get Started
+  </button>
+</div>
+
+<!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-radial-1"></div>
+  <div class="hero-radial-2"></div>
+
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="hero-badge">
+          <div class="hero-badge-dot"></div>
+          <span>Trusted by 10,000+ users worldwide</span>
+        </div>
+
+        <h1 class="hero-title">
+          Secure Smart<br>
+          <span class="gold-text">Locker</span><br>
+          for Modern<br>
+          Delivery
         </h1>
 
-        <p>
-          Secure, fast, and contactless smart locker system
-          designed for modern logistics and premium user experience.
+        <p class="hero-subtitle">
+          Contactless, secure package storage with real-time tracking and QR access.
+          The future of delivery is here.
         </p>
 
-        <div class="hero-buttons">
+        <div class="hero-btns">
+          <button class="btn-dark">
+</section>
 
-          <button class="btn btn-primary">
-            Explore
+<!-- ═══════════════ FEATURES ═══════════════ -->
+<section id="features">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <div class="section-badge"><span>Features</span></div>
+      <h2 class="section-title">Everything you need</h2>
+      <p class="section-subtitle">Advanced features designed for modern delivery and package management</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
+        </div>
+        <h3 class="feature-title">QR Access</h3>
+        <p class="feature-desc">Instant access with secure QR code scanning. No keys, no hassle.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="feature-title">Real-time Tracking</h3>
+        <p class="feature-desc">Track your packages in real-time with live status updates and notifications.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="feature-title">Secure Storage</h3>
+        <p class="feature-desc">Bank-grade security with encrypted access and 24/7 surveillance.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/></svg>
+        </div>
+        <h3 class="feature-title">Contactless Pickup</h3>
+        <p class="feature-desc">Safe and convenient contactless package retrieval anytime.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        </div>
+        <h3 class="feature-title">Smart Notifications</h3>
+        <p class="feature-desc">Get instant alerts when your package arrives or is ready for pickup.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3 class="feature-title">24/7 Access</h3>
+        <p class="feature-desc">Access your locker anytime, anywhere with our always-available system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ PRODUCT SHOWCASE ═══════════════ -->
+<section id="product">
+  <div class="section-inner">
+    <div class="product-grid">
+      <div class="product-img-wrap reveal">
+        <div class="product-glow"></div>
+        <div class="product-img-card">
+          <img src="https://images.unsplash.com/photo-1739174524558-efe1a3f42697?crop=entropy&cs=tinysrgb&fit=max&fm=jpg&q=80&w=1080" alt="Kulocker Smart Locker Units" />
+          <div class="product-float product-float-top">
+            <div class="float-row">
+              <div class="pf-icon-gold">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
+              </div>
+              <div>
+                <div class="float-label" style="font-size:.75rem">Delivery Speed</div>
+                <div class="float-value">2x Faster</div>
+              </div>
+            </div>
+          </div>
+          <div class="product-float product-float-bottom">
+            <div class="float-row">
+              <div class="pf-icon-green">
+                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12.55a11 11 0 0 1 14.08 0"/><path d="M1.42 9a16 16 0 0 1 21.16 0"/><path d="M8.53 16.11a6 6 0 0 1 6.95 0"/><line x1="12" x2="12.01" y1="20" y2="20"/></svg>
+              </div>
+              <div>
+                <div class="float-label" style="font-size:.75rem">System Status</div>
+                <div class="float-green" style="margin-top:2px">
+                  <div class="green-dot"></div>
+                  <span class="float-value">Online</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="product-content reveal">
+        <div class="section-badge"><span>Smart Technology</span></div>
+        <h2 class="section-title">Premium locker<br><span class="gold-text">technology</span></h2>
+        <p class="section-subtitle">Built with cutting-edge IoT technology and designed for seamless integration into modern buildings and delivery systems.</p>
+        <div class="checklist">
+          <div class="checklist-item">
+            <div class="check-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Advanced biometric and QR code authentication</span>
+          </div>
+          <div class="checklist-item">
+            <div class="check-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Cloud-based management system</span>
+          </div>
+          <div class="checklist-item">
+            <div class="check-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Real-time monitoring and analytics</span>
+          </div>
+          <div class="checklist-item">
+            <div class="check-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Automatic temperature control</span>
+          </div>
+          <div class="checklist-item">
+            <div class="check-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Energy-efficient LED lighting</span>
+          </div>
+          <div class="checklist-item">
+            <div class="check-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"/></svg></div>
+            <span>Modular and scalable design</span>
+          </div>
+        </div>
+        <button class="btn-gold" style="padding:14px 28px;border-radius:999px;display:inline-flex;align-items:center;gap:8px;font-size:.95rem">
+          <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          Explore Technology
+        </button>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ STATISTICS ═══════════════ -->
+<section id="statistics">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <h2 class="section-title">Trusted worldwide</h2>
+      <p class="section-subtitle">Join thousands of businesses and individuals using Kulocker for secure deliveries</p>
+    </div>
+    <div class="stats-grid">
+      <div class="stat-card reveal">
+        <div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/><circle cx="9" cy="7" r="4"/><path d="M22 21v-2a4 4 0 0 0-3-3.87"/><path d="M16 3.13a4 4 0 0 1 0 7.75"/></svg></div>
+        <div class="stat-value">50K+</div>
+        <div class="stat-label">Active Users</div>
+        <div class="stat-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <span>+23%</span>
+        </div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/></svg></div>
+        <div class="stat-value">2M+</div>
+        <div class="stat-label">Deliveries Secured</div>
+        <div class="stat-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <span>+18%</span>
+        </div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><line x1="2" x2="22" y1="12" y2="12"/><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg></div>
+        <div class="stat-value">120+</div>
+        <div class="stat-label">Cities Worldwide</div>
+        <div class="stat-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <span>+35%</span>
+        </div>
+      </div>
+      <div class="stat-card reveal">
+        <div class="stat-icon"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg></div>
+        <div class="stat-value">99.9%</div>
+        <div class="stat-label">Uptime SLA</div>
+        <div class="stat-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="22 7 13.5 15.5 8.5 10.5 2 17"/><polyline points="16 7 22 7 22 13"/></svg>
+          <span>Guaranteed</span>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MOBILE APP ═══════════════ -->
+<section id="mobileapp">
+  <div class="section-inner">
+    <div class="mobile-grid">
+      <div class="mobile-content reveal">
+        <div class="section-badge"><span>Mobile Experience</span></div>
+        <h2 class="section-title">Control everything<br>from your<br><span class="gold-text">smartphone</span></h2>
+        <p class="section-subtitle" style="margin-bottom:2rem">Manage deliveries, unlock lockers, track packages, and receive notifications—all from our beautiful mobile app.</p>
+        <div class="stars-row">
+          <div class="stars">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          </div>
+          <span class="stars-val">4.9</span>
+          <div class="divider-v"></div>
+          <span class="reviews-text">15,000+ Reviews</span>
+        </div>
+        <div class="app-btns">
+          <button class="btn-app btn-app-dark">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M18.71 19.5c-.83 1.24-1.71 2.45-3.05 2.47-1.34.03-1.77-.79-3.29-.79-1.53 0-2 .77-3.27.82-1.31.05-2.3-1.32-3.14-2.53C4.25 17 2.94 12.45 4.7 9.39c.87-1.52 2.43-2.48 4.12-2.51 1.28-.02 2.5.87 3.29.87.78 0 2.26-1.07 3.8-.91.65.03 2.47.26 3.64 1.98-.09.06-2.17 1.28-2.15 3.81.03 3.02 2.65 4.03 2.68 4.04-.03.07-.42 1.44-1.38 2.83M13 3.5c.73-.83 1.94-1.46 2.94-1.5.13 1.17-.34 2.35-1.04 3.19-.69.85-1.83 1.51-2.95 1.42-.15-1.15.41-2.35 1.05-3.11z"/></svg>
+            <div>
+              <div class="btn-app-sub">Download on the</div>
+              <div class="btn-app-main">App Store</div>
+            </div>
           </button>
-
-          <button class="btn btn-secondary">
-            Learn More
+          <button class="btn-app btn-app-light">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="m3 20.5v-17c0-.83.94-1.3 1.6-.8l14 8.5c.6.36.6 1.24 0 1.6l-14 8.5c-.66.5-1.6.03-1.6-.8z"/></svg>
+            <div>
+              <div class="btn-app-sub">GET IT ON</div>
+              <div class="btn-app-main">Google Play</div>
+            </div>
           </button>
-
         </div>
-
+        <div class="app-stats">
+          <div><div class="app-stat-val">500K+</div><div class="app-stat-label">Downloads</div></div>
+          <div><div class="app-stat-val">4.9</div><div class="app-stat-label">App Rating</div></div>
+          <div><div class="app-stat-val">24/7</div><div class="app-stat-label">Support</div></div>
+        </div>
       </div>
 
-      <div class="locker-card">
-
-        <div class="locker-visual">
-
-          <div class="door"></div>
-          <div class="door gold"></div>
-          <div class="door"></div>
-
+      <div class="phone-wrap reveal">
+        <div class="phone-glow"></div>
+        <div style="position:relative">
+          <div class="phone">
+            <div class="phone-screen">
+              <div class="phone-notch"></div>
+              <div class="phone-content">
+                <div class="phone-header">
+                  <span class="phone-header-title">My Lockers</span>
+                  <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="14" height="20" x="5" y="2" rx="2" ry="2"/><path d="M12 18h.01"/></svg>
+                </div>
+                <div class="locker-card-gold">
+                  <div class="locker-row">
+                    <span class="locker-num">Locker #A-247</span>
+                    <div class="locker-live"></div>
+                  </div>
+                  <div class="locker-status">Ready</div>
+                  <div class="locker-desc">Package waiting for pickup</div>
+                </div>
+                <div class="locker-card-white">
+                  <div class="locker-row">
+                    <span class="locker-num-gray">Locker #B-103</span>
+                    <span class="tag-empty">Empty</span>
+                  </div>
+                  <div class="locker-avail">Available</div>
+                </div>
+                <div class="locker-card-white">
+                  <div class="locker-row">
+                    <span class="locker-num-gray">Locker #C-089</span>
+                    <span class="tag-empty">Empty</span>
+                  </div>
+                  <div class="locker-avail">Available</div>
+                </div>
+              </div>
+            </div>
+          </div>
+          <div class="phone-float phone-float-right">
+            <div style="font-size:.75rem;color:var(--gray);margin-bottom:4px">Unlock Speed</div>
+            <div style="font-weight:700;color:var(--black)">0.3s</div>
+          </div>
+          <div class="phone-float phone-float-left">
+            <div style="font-size:.75rem;color:var(--gray);margin-bottom:4px">Security</div>
+            <div class="float-green" style="margin-top:0">
+              <div class="green-dot"></div>
+              <span style="font-weight:700;color:var(--black)">Active</span>
+            </div>
+          </div>
         </div>
-
       </div>
-
     </div>
+  </div>
+</section>
 
-  </section>
-
-  <!-- FEATURES -->
-  <section>
-
-    <div class="container">
-
-      <div class="section-title">
-
-        <h2>Premium Features</h2>
-
-        <p>
-          Designed with security, speed, and convenience
-          for modern delivery ecosystems.
-        </p>
-
-      </div>
-
-      <div class="features-grid">
-
-        <div class="feature-card">
-          <div class="icon">🔒</div>
-          <h3>Secure Storage</h3>
-          <p>Advanced smart locker protection system.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="icon">📦</div>
-          <h3>Smart Delivery</h3>
-          <p>Fast and contactless package pickup experience.</p>
-        </div>
-
-        <div class="feature-card">
-          <div class="icon">📱</div>
-          <h3>QR Access</h3>
-          <p>Easy access using secure QR technology.</p>
-        </div>
-
-      </div>
-
+<!-- ═══════════════ TESTIMONIALS ═══════════════ -->
+<section id="testimonials">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <div class="section-badge"><span>Testimonials</span></div>
+      <h2 class="section-title">Loved by customers</h2>
+      <p class="section-subtitle">See what our users have to say about their experience with Kulocker</p>
     </div>
-
-  </section>
-
-  <!-- STATS -->
-  <section>
-
-    <div class="container stats">
-
-      <div class="stats-grid">
-
-        <div class="stat-card">
-          <h3 class="counter" data-target="500">0</h3>
-          <p>Smart Lockers</p>
+    <div class="testimonials-grid">
+      <div class="testimonial-card reveal">
+        <svg class="quote-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.3 6.2H7c.3-1.6 1.4-3.3 3.5-4.2L9.4 0C6 1.4 3.5 5.4 3.5 9.1V22h7.8V6.2zm9.2 0h-4.3C16.5 4.6 17.6 3 19.7 2L18.6 0C15.2 1.4 12.7 5.4 12.7 9.1V22h7.8V6.2z"/></svg>
+        <div class="t-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
         </div>
-
-        <div class="stat-card">
-          <h3 class="counter" data-target="12000">0</h3>
-          <p>Packages Delivered</p>
+        <p class="t-content">"Kulocker has completely transformed how we handle package deliveries in our building. The residents love the convenience and security."</p>
+        <div class="t-author">
+          <div class="t-avatar">SJ</div>
+          <div>
+            <div class="t-name">Sarah Johnson</div>
+            <div class="t-role">Property Manager, Downtown Residences</div>
+          </div>
         </div>
-
-        <div class="stat-card">
-          <h3 class="counter" data-target="98">0</h3>
-          <p>Customer Satisfaction</p>
-        </div>
-
       </div>
-
+      <div class="testimonial-card reveal">
+        <svg class="quote-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.3 6.2H7c.3-1.6 1.4-3.3 3.5-4.2L9.4 0C6 1.4 3.5 5.4 3.5 9.1V22h7.8V6.2zm9.2 0h-4.3C16.5 4.6 17.6 3 19.7 2L18.6 0C15.2 1.4 12.7 5.4 12.7 9.1V22h7.8V6.2z"/></svg>
+        <div class="t-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="t-content">"The integration was seamless and our delivery success rate has increased by 40%. Best investment we've made this year."</p>
+        <div class="t-author">
+          <div class="t-avatar">MC</div>
+          <div>
+            <div class="t-name">Michael Chen</div>
+            <div class="t-role">E-commerce Director, TechMart Solutions</div>
+          </div>
+        </div>
+      </div>
+      <div class="testimonial-card reveal">
+        <svg class="quote-icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor"><path d="M11.3 6.2H7c.3-1.6 1.4-3.3 3.5-4.2L9.4 0C6 1.4 3.5 5.4 3.5 9.1V22h7.8V6.2zm9.2 0h-4.3C16.5 4.6 17.6 3 19.7 2L18.6 0C15.2 1.4 12.7 5.4 12.7 9.1V22h7.8V6.2z"/></svg>
+        <div class="t-stars">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"/></svg>
+        </div>
+        <p class="t-content">"Real-time tracking and analytics give us complete visibility. The system is reliable and the support team is exceptional."</p>
+        <div class="t-author">
+          <div class="t-avatar">ER</div>
+          <div>
+            <div class="t-name">Emily Rodriguez</div>
+            <div class="t-role">Operations Lead, Urban Logistics</div>
+          </div>
+        </div>
+      </div>
     </div>
+  </div>
+</section>
 
-  </section>
+<!-- ═══════════════ FAQ ═══════════════ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <div class="section-badge"><span>FAQ</span></div>
+      <h2 class="section-title">Common questions</h2>
+      <p class="section-subtitle">Everything you need to know about Kulocker</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item active reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">How does Kulocker work?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body" style="max-height:400px">
+          <div class="faq-body-inner">Kulocker provides secure smart lockers for package delivery. Simply receive a QR code when your package arrives, scan it at the locker, and retrieve your items 24/7. The system integrates seamlessly with major delivery services.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">Is my package safe in a Kulocker?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Absolutely. Our lockers feature bank-grade security with encrypted access, 24/7 surveillance, and tamper-proof construction. Each locker is individually secured and can only be opened with your unique QR code or biometric authentication.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">What sizes of packages can I receive?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Kulocker offers multiple locker sizes ranging from small (for documents and small parcels) to extra-large (for bigger packages). The system automatically assigns the appropriate size based on your delivery dimensions.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">How much does it cost?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">We offer flexible pricing plans for individuals, property managers, and businesses. Individual users can access lockers on a pay-per-use basis starting at $2 per delivery, or subscribe to monthly plans starting at $15. Contact us for custom enterprise pricing.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">Can I integrate Kulocker with my existing systems?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Yes! Kulocker offers comprehensive APIs and integrations with major property management systems, e-commerce platforms, and delivery services. Our technical team provides full support during the integration process.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">What happens if I have issues accessing my locker?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Our 24/7 customer support team is always available via the mobile app, phone, or email. The app also includes troubleshooting guides and remote assistance features to help resolve issues immediately.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
-  <!-- External JS -->
-  <script src="js/script.js"></script>
+<!-- ═══════════════ CTA ═══════════════ -->
+<section id="cta">
+  <div class="section-inner">
+    <div class="cta-box reveal">
+      <div class="cta-radial-1"></div>
+      <div class="cta-radial-2"></div>
+      <div class="cta-glow-1"></div>
+      <div class="cta-glow-2"></div>
+      <div class="cta-inner">
+        <div class="cta-badge">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3-1.912 5.813a2 2 0 0 1-1.275 1.275L3 12l5.813 1.912a2 2 0 0 1 1.275 1.275L12 21l1.912-5.813a2 2 0 0 1 1.275-1.275L21 12l-5.813-1.912a2 2 0 0 1-1.275-1.275L12 3Z"/><path d="M5 3v4"/><path d="M19 17v4"/><path d="M3 5h4"/><path d="M17 19h4"/></svg>
+          <span>Limited Time Offer</span>
+        </div>
+        <h2 class="cta-title">Ready to revolutionize<br>your deliveries?</h2>
+        <p class="cta-subtitle">Join thousands of satisfied customers and experience the future of secure package management. Get started with a 30-day free trial.</p>
+        <div class="cta-btns">
+          <button class="btn-cta-gold">
+            Start Free Trial
+            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
+          </button>
+          <button class="btn-cta-ghost">Schedule a Demo</button>
+        </div>
+        <div class="cta-notes">
+          <div class="cta-note">
+            <div class="cta-note-dot"><div class="cta-note-dot-inner"></div></div>
+            <span>No credit card required</span>
+          </div>
+          <div class="cta-note">
+            <div class="cta-note-dot"><div class="cta-note-dot-inner"></div></div>
+            <span>Cancel anytime</span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
 
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <a href="#" class="footer-logo">
+          <div class="footer-logo-icon">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><rect width="18" height="11" x="3" y="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+          </div>
+          <span class="footer-logo-text">Kulocker</span>
+        </a>
+        <p>Secure smart locker solutions for modern delivery. Making package management simple, safe, and accessible 24/7.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>Product</h3>
+        <ul>
+          <li><a href="#">Features</a></li>
+          <li><a href="#">Pricing</a></li>
+          <li><a href="#">Security</a></li>
+          <li><a href="#">Integrations</a></li>
+          <li><a href="#">API</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Company</h3>
+        <ul>
+          <li><a href="#">About Us</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">Blog</a></li>
+          <li><a href="#">Press Kit</a></li>
+          <li><a href="#">Contact</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>Legal</h3>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+          <li><a href="#">GDPR</a></li>
+          <li><a href="#">Licenses</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Kulocker. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Status</a>
+        <a href="#">Support</a>
+        <a href="#">Documentation</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="script.js"></script>
 </body>
 </html>

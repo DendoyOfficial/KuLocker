@@ -24,3 +24,16 @@ TECHSTACK USING :
 4. PHP
 5. XAMPP/SQL
 
+DBMS
+- konfigurasi KuLocker berbasis client server sederhana dengan fokus pada akses digital, keamanan, dan manajemen data loker.
+- tabel spesifikasi
+| 1 | Nama Sistem | KuLocker |
+| 2 | Tujuan | Sistem penyewaan dan pengelolaan loker berbasis digital untuk mahasiswa |
+| 3 | Role Pengguna | - Mahasiswa (User) <br> - Petugas/Admin Kampus <br> - Super Admin |
+| 4 | Fitur Utama | - Smart Access & Booking - Security Monitoring - Management System |
+| 5 | Frontend | HTML, CSS, Java |
+| 6 | Backend | PHP |
+| 7 | Database | SQL DBMS (XAMPP) |
+| 8 | Tim Pengembang | - Sobihatun Nufus (PHP/SQL/Backend) <br> - Syaqif Dendi Alfayed (HTML/Java/Backend) <br> - M. Arya Raka Bimo (HTML/CSS/SQL/Backend) |
+| 9 | Platform Target | Web-based (akses via browser) |
+

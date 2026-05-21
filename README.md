@@ -27,16 +27,23 @@ TECHSTACK USING :
 DBMS
 - konfigurasi KuLocker berbasis client server sederhana dengan fokus pada akses digital, keamanan, dan manajemen data loker.
 
-<br> - tabel spesifikasi
-<br> | 1 | Nama Sistem | KuLocker |
-<br> | 2 | Tujuan | Sistem penyewaan dan pengelolaan loker berbasis digital untuk mahasiswa |
-<br> | 3 | Role Pengguna | - Mahasiswa (User) <br> - Petugas/Admin Kampus <br> - Super Admin |
-<br> | 4 | Fitur Utama | - Smart Access & Booking - Security Monitoring - Management System |
-<br> | 5 | Frontend | HTML, CSS, Java |
-<br> | 6 | Backend | PHP |
-<br> | 7 | Database | SQL DBMS (XAMPP) |
-<br> | 8 | Tim Pengembang | - Sobihatun Nufus (PHP/SQL/Backend) <br> - Syaqif Dendi Alfayed <br> (HTML/Java/Backend) <br> - M. Arya Raka Bimo (HTML/CSS/SQL/Backend) |
-<br> | 9 | Platform Target | Web-based (akses via browser) |
+## 📊 Tabel Spesifikasi KuLocker
+
+| **Kategori**            | **Spesifikasi**                                                                 |
+|--------------------------|---------------------------------------------------------------------------------|
+| **Platform**             | Web-based & Mobile App (Android/iOS)                                            |
+| **User Role**            | Mahasiswa (User), Admin Kampus, Super Admin (IT Support)                        |
+| **Fitur Mahasiswa**      | Smart Access & Booking, QR-code akses, Notifikasi waktu, Estimasi harga sewa, Riwayat penggunaan |
+| **Fitur Admin Kampus**   | Monitoring ketersediaan loker, Pengecekan fisik, Panel layanan terpadu, Pusat bantuan |
+| **Fitur Super Admin**    | Manajemen sistem client–server, Security monitoring, Database & server management |
+| **Keamanan**             | QR-code unik, Autentikasi login, Monitoring server                              |
+| **Integrasi Hardware**   | Smart locker dengan sensor status pintu & kunci elektronik                      |
+| **Database**             | MySQL / PostgreSQL (untuk transaksi & data pengguna)                            |
+| **Server**               | Client–Server Architecture (REST API, integrasi hardware)                       |
+| **Notifikasi**           | Push notification (mobile), Email alert                                         |
+| **Estimasi Harga Sewa**  | Per jam / per hari, otomatis dihitung dari sistem                                |
+| **Monitoring**           | Real-time status loker (kosong/terpakai)                                        |
+
 
 SITE MAP
 1. Home

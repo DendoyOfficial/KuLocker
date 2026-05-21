@@ -26,6 +26,7 @@ TECHSTACK USING :
 
 DBMS
 - konfigurasi KuLocker berbasis client server sederhana dengan fokus pada akses digital, keamanan, dan manajemen data loker.
+
 <br> - tabel spesifikasi
 <br> | 1 | Nama Sistem | KuLocker |
 <br> | 2 | Tujuan | Sistem penyewaan dan pengelolaan loker berbasis digital untuk mahasiswa |
@@ -34,6 +35,39 @@ DBMS
 <br> | 5 | Frontend | HTML, CSS, Java |
 <br> | 6 | Backend | PHP |
 <br> | 7 | Database | SQL DBMS (XAMPP) |
-<br> | 8 | Tim Pengembang | - Sobihatun Nufus (PHP/SQL/Backend) <br> - Syaqif Dendi Alfayed (HTML/Java/Backend) <br> - M. Arya Raka Bimo (HTML/CSS/SQL/Backend) |
+<br> | 8 | Tim Pengembang | - Sobihatun Nufus (PHP/SQL/Backend) <br> - Syaqif Dendi Alfayed <br> (HTML/Java/Backend) <br> - M. Arya Raka Bimo (HTML/CSS/SQL/Backend) |
 <br> | 9 | Platform Target | Web-based (akses via browser) |
 
+SITE MAP
+1. Home
+- Deskripsi singkat aplikasi
+- Navigasi ke fitur utama
+- Informasi tim pengembang
+2. Login / Register
+- Form login mahasiswa
+- Form login admin kampus
+- Form login super admin
+3. Dashboard Mahasiswa (User)
+- Status ketersediaan loker (real-time)
+- Smart Access & Booking
+- Riwayat pemakaian loker
+- Notifikasi waktu pemakaian
+- QR-code untuk akses loker
+4. Dashboard Admin Kampus
+- Monitoring ketersediaan loker
+- Pengecekan fisik loker
+- Panel layanan terpadu (riwayat transaksi, status loker)
+- Pusat bantuan untuk mahasiswa
+5. Dashboard Super Admin (IT Support)
+- Manajemen sistem (database, server, integrasi hardware)
+- Security monitoring
+- Konfigurasi sistem client–server
+- Pengelolaan akun admin kampus
+6. Informasi & Bantuan
+- Pusat bantuan (FAQ, kontak support)
+- Dokumentasi penggunaan sistem
+- Panduan teknis untuk admin/super admin
+7. Pengaturan
+- Profil pengguna
+- Pengaturan keamanan
+- Preferensi notifikasi

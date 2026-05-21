@@ -27,7 +27,7 @@ TECHSTACK USING :
 DBMS
 - konfigurasi KuLocker berbasis client server sederhana dengan fokus pada akses digital, keamanan, dan manajemen data loker.
 
-## 📊 Tabel Spesifikasi KuLocker
+# Tabel Spesifikasi KuLocker
 
 | **Kategori**            | **Spesifikasi**                                                                 |
 |--------------------------|---------------------------------------------------------------------------------|

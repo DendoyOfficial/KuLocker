@@ -1,0 +1,277 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard Awal - KuLocker</title>
+
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
+     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
+     crossorigin=""/>
+
+    <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
+
+    <link rel="stylesheet" href="css/dashboard.css" />
+</head>
+<body>
+    <!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav>
+  <div class="nav-inner">
+      <div class="nav-logo-icon">
+        <img src="img/Kulocker.jpeg" alt="Logo Kulocker">
+      </div>
+
+    <div class="nav-links" id="navLinks">
+      <a href="#features">Home</a>
+      <a href="#product">Lokasi</a>
+      <a href="#pricing">Bantuan</a>
+    </div>
+
+    <button class="btn-gold" id="navCta" onclick="window.location.href='sign-in.html'">
+      Sign-In
+    </button>
+  </div>
+</nav>
+
+    <!-- ═══════════════ HERO ═══════════════ -->
+<section id="hero">
+  <div class="hero-radial-1"></div>
+  <div class="hero-radial-2"></div>
+
+  <div class="hero-inner">
+    <div class="hero-grid">
+      <div class="reveal">
+        <div class="hero-badge">
+          <span>Coming sooon</span>
+        </div>
+
+        <h1 class="hero-title">
+          Solusi <span class="gold-text">Loker Pintar</span> 
+          untuk <br> Penyimpanan yang <span class="gold-text">Aman</span<br>
+        </h1>
+
+        <p class="hero-subtitle">
+          Contactless, secure package storage with real-time tracking and QR access.
+          The future of delivery is here.
+        </p>
+
+        <div class="hero-btns">
+          <button class="btn-dark" onclick="window.location.href='sign-in.html'"> Daftar sekarang</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+
+<!-- ═══════════════ FEATURES ═══════════════ -->
+<section id="features">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <div class="section-badge"><span>Features</span></div>
+      <h2 class="section-title">Everything you need</h2>
+      <p class="section-subtitle">Advanced features designed for modern delivery and package management</p>
+    </div>
+    <div class="features-grid">
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
+        </div>
+        <h3 class="feature-title">QR Access</h3>
+        <p class="feature-desc">Instant access with secure QR code scanning. No keys, no hassle.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 10c0 6-8 12-8 12s-8-6-8-12a8 8 0 0 1 16 0Z"/><circle cx="12" cy="10" r="3"/></svg>
+        </div>
+        <h3 class="feature-title">Real-time Tracking</h3>
+        <p class="feature-desc">Track your packages in real-time with live status updates and notifications.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
+        </div>
+        <h3 class="feature-title">Secure Storage</h3>
+        <p class="feature-desc">Bank-grade security with encrypted access and 24/7 surveillance.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16.5 9.4 7.55 4.24"/><path d="M21 16V8a2 2 0 0 0-1-1.73l-7-4a2 2 0 0 0-2 0l-7 4A2 2 0 0 0 3 8v8a2 2 0 0 0 1 1.73l7 4a2 2 0 0 0 2 0l7-4A2 2 0 0 0 21 16z"/><polyline points="3.29 7 12 12 20.71 7"/><line x1="12" x2="12" y1="22" y2="12"/></svg>
+        </div>
+        <h3 class="feature-title">Contactless Pickup</h3>
+        <p class="feature-desc">Safe and convenient contactless package retrieval anytime.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
+        </div>
+        <h3 class="feature-title">Smart Notifications</h3>
+        <p class="feature-desc">Get instant alerts when your package arrives or is ready for pickup.</p>
+      </div>
+      <div class="feature-card reveal">
+        <div class="feature-icon">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
+        </div>
+        <h3 class="feature-title">24/7 Access</h3>
+        <p class="feature-desc">Access your locker anytime, anywhere with our always-available system.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ MAPS ═══════════════ -->
+<section id="tempat-maps">
+  <div class="text-center reveal">
+    <div class="section-badge"><span>Location</span></div>
+    
+    <h1 class="section-title">Maps User Location</h1>
+  </div>
+  <div class="maps" id="maps">
+
+  </div>
+  
+
+  <div></div>
+</section>
+
+<!-- ═══════════════ FAQ ═══════════════ -->
+<section id="faq">
+  <div class="section-inner">
+    <div class="text-center reveal">
+      <div class="section-badge"><span>FAQ</span></div>
+      <h2 class="section-title">Common questions</h2>
+      <p class="section-subtitle">Everything you need to know about Kulocker</p>
+    </div>
+    <div class="faq-list">
+      <div class="faq-item active reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">How does Kulocker work?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body" style="max-height:400px">
+          <div class="faq-body-inner">Kulocker provides secure smart lockers for package delivery. Simply receive a QR code when your package arrives, scan it at the locker, and retrieve your items 24/7. The system integrates seamlessly with major delivery services.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">Is my package safe in a Kulocker?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Absolutely. Our lockers feature bank-grade security with encrypted access, 24/7 surveillance, and tamper-proof construction. Each locker is individually secured and can only be opened with your unique QR code or biometric authentication.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">What sizes of packages can I receive?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Kulocker offers multiple locker sizes ranging from small (for documents and small parcels) to extra-large (for bigger packages). The system automatically assigns the appropriate size based on your delivery dimensions.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">How much does it cost?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">We offer flexible pricing plans for individuals, property managers, and businesses. Individual users can access lockers on a pay-per-use basis starting at $2 per delivery, or subscribe to monthly plans starting at $15. Contact us for custom enterprise pricing.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">Can I integrate Kulocker with my existing systems?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Yes! Kulocker offers comprehensive APIs and integrations with major property management systems, e-commerce platforms, and delivery services. Our technical team provides full support during the integration process.</div>
+        </div>
+      </div>
+      <div class="faq-item reveal">
+        <button class="faq-trigger" onclick="toggleFaq(this)">
+          <span class="faq-question">What happens if I have issues accessing my locker?</span>
+          <svg class="faq-chevron" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polyline points="6 9 12 15 18 9"/></svg>
+        </button>
+        <div class="faq-body">
+          <div class="faq-body-inner">Our 24/7 customer support team is always available via the mobile app, phone, or email. The app also includes troubleshooting guides and remote assistance features to help resolve issues immediately.</div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
+  <div class="footer-inner">
+    <div class="footer-grid">
+      <div class="footer-brand">
+        <div class="footer-logo-icon">
+        <img src="img/Kulocker.jpeg" alt="Logo Kulocker">
+      </div>
+        <p>Secure smart locker solutions for modern delivery. Making package management simple, safe, and accessible 24/7.</p>
+        <div class="social-links">
+          <a href="#" class="social-link" aria-label="Twitter">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="LinkedIn">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Instagram">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
+          </a>
+          <a href="#" class="social-link" aria-label="Email">
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
+          </a>
+        </div>
+      </div>
+      <div class="footer-col">
+        <h3>NAVIGATION</h3>
+        <ul>
+          <li><a href="#">Home</a></li>
+          <li><a href="#">Location</a></li>
+          <li><a href="#">Bantuan</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>CONTACT</h3>
+        <ul>
+          <li><a href="#">082102924</a></li>
+          <li><a href="#">@KuLocker</a></li>
+          <li><a href="#">Jl. Sepatu dua belas. Kiri kanan kotak x segitiga </a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h3>LEGALITAS</h3>
+        <ul>
+          <li><a href="#">Privacy Policy</a></li>
+          <li><a href="#">Terms of Service</a></li>
+          <li><a href="#">Cookie Policy</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <p class="footer-copy">© 2026 Kulocker. All rights reserved.</p>
+      <div class="footer-links">
+        <a href="#">Status</a>
+        <a href="#">Support</a>
+        <a href="#">Documentation</a>
+      </div>
+    </div>
+  </div>
+</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+    integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
+    crossorigin="">
+</script>
+
+<script src="js/dashboard.js"></script>
+
+</body>
+</html>

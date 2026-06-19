@@ -1,0 +1,392 @@
+/* ============================================================
+   KuLocker - Locker Selection Styling (Desktop View 1280px)
+   ============================================================ */
+
+:root {
+    --gold: #D4AF37;
+    --gold-dark: #C9A227;
+    --gold-light: #F5D76E;
+    --black: #111111;
+    --gray: #666666;
+    --gray-bg: #F8F8F8;
+    --white: #ffffff;
+    --border: rgba(0, 0, 0, 0.08);
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', system-ui, -apple-system, sans-serif;
+}
+
+body {
+    background-color: #f4f5f7;
+    color: var(--black);
+    padding-bottom: 60px;
+}
+
+/* Container Utama Sejajar dengan Navbar 1280px */
+.locker-container {
+    width: 100%;
+    max-width: 1280px;
+    margin: 30px auto;
+    padding: 0 20px;
+    background: none; /* Menghilangkan style box mobile terdahulu */
+    box-shadow: none;
+    border: none;
+}
+
+/* App Header */
+.app-header {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+    background: var(--white);
+    padding: 20px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+}
+
+.btn-back {
+    background: var(--white);
+    border: 1px solid var(--border);
+    color: var(--black);
+    font-size: 1.3rem;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    transition: all 0.2s ease;
+}
+
+.btn-back:hover {
+    background-color: var(--black);
+    color: var(--white);
+}
+
+.header-text {
+    display: flex;
+    flex-direction: column;
+}
+
+.header-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.5px;
+}
+
+.header-subtitle {
+    font-size: 0.9rem;
+    color: var(--gray);
+    margin-top: 2px;
+}
+
+/* Status Legend */
+.status-legend {
+    display: flex;
+    justify-content: flex-start;
+    gap: 24px;
+    padding: 16px 20px;
+    background-color: var(--white);
+    font-size: 0.88rem;
+    color: var(--black);
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    margin-bottom: 24px;
+}
+
+.legend-item {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    font-weight: 500;
+}
+
+.legend-color {
+    width: 18px;
+    height: 18px;
+    border-radius: 4px;
+}
+
+.color-available { background-color: var(--gold); }
+.color-unavailable { background-color: #e5e7eb; }
+.color-selected { background-color: #3b82f6; }
+
+
+/* Layout Grid 2 Kolom */
+.selection-layout {
+    display: grid;
+    grid-template-columns: 1fr 400px; /* Kiri denah loker, Kanan panel aksi */
+    gap: 30px;
+    align-items: start;
+}
+
+/* KOLOM KIRI: Denah Loker */
+.grid-area {
+    background-color: var(--white);
+    padding: 40px;
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.01);
+}
+
+.locker-grid {
+    display: grid;
+    /* 5 Kolom: 2 kiri, 1 sekat jalan tengah, 2 kanan */
+    grid-template-columns: repeat(2, minmax(0, 70px)) 40px repeat(2, minmax(0, 70px));
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+    margin-bottom: 40px;
+    justify-content: center;
+}
+
+.locker-btn {
+    font-weight: 700;
+    height: 60px;
+    border-radius: 10px;
+    text-align: center;
+    border: none;
+    font-size: 1.1rem;
+    transition: all 0.2s ease;
+}
+
+.btn-available {
+    background-color: var(--gold);
+    color: var(--white);
+    cursor: pointer;
+    box-shadow: 0 4px 10px rgba(212, 175, 55, 0.15);
+}
+
+.btn-available:hover {
+    background-color: var(--gold-dark);
+    transform: translateY(-2px);
+}
+
+.btn-available:active {
+    transform: translateY(0);
+}
+
+.btn-selected {
+    background-color: #3b82f6;
+    color: var(--white);
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(59, 130, 246, 0.3);
+}
+
+.btn-unavailable-seat {
+    background-color: #e5e7eb;
+    color: #9ca3af;
+    cursor: not-allowed;
+}
+
+.grid-gap {
+    visibility: hidden;
+}
+
+.entrance-label {
+    width: 100%;
+    max-width: 400px;
+    background-color: var(--black);
+    color: var(--white);
+    text-align: center;
+    padding: 10px 0;
+    border-radius: 8px;
+    font-size: 0.8rem;
+    font-weight: 700;
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+}
+
+
+/* KOLOM KANAN: Sticky Panel */
+.sidebar-right {
+    background-color: var(--white);
+    border-radius: 16px;
+    border: 1px solid var(--border);
+    padding: 24px;
+    box-shadow: 0 4px 20px rgba(0,0,0,0.02);
+    position: sticky;
+    top: 20px;
+}
+
+.section-title {
+    font-size: 1.05rem;
+    font-weight: 700;
+    color: var(--black);
+    margin-bottom: 24px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    border-bottom: 2px solid var(--black);
+    padding-bottom: 8px;
+}
+
+/* Durasi Section Dalam Sidebar */
+.duration-section {
+    width: 100%;
+    margin-bottom: 24px;
+}
+
+.duration-section.hidden {
+    display: none;
+}
+
+.duration-flex {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: var(--gray-bg);
+    padding: 16px;
+    border-radius: 12px;
+    margin-bottom: 8px;
+}
+
+.duration-label {
+    font-size: 0.75rem;
+    color: var(--gray);
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    font-weight: 700;
+}
+
+.selected-title {
+    font-size: 1.1rem;
+    font-weight: 800;
+    color: var(--black);
+    margin-top: 4px;
+}
+
+.counter-box {
+    display: flex;
+    align-items: center;
+    border: 1px solid rgba(0,0,0,0.15);
+    border-radius: 8px;
+    overflow: hidden;
+    background-color: var(--white);
+}
+
+.counter-btn {
+    padding: 8px 14px;
+    background-color: var(--white);
+    border: none;
+    font-weight: bold;
+    font-size: 1.1rem;
+    color: var(--black);
+    cursor: pointer;
+    transition: background-color 0.2s;
+}
+
+.counter-btn:hover {
+    background-color: var(--gray-bg);
+}
+
+.hours-display {
+    padding: 6px 10px 6px 14px;
+    font-weight: 700;
+    color: var(--black);
+    text-align: center;
+}
+
+.counter-box p {
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: var(--black);
+}
+
+.price-note {
+    font-size: 0.8rem;
+    color: #7e22ce;
+    font-weight: 600;
+    padding-left: 4px;
+}
+
+.divider {
+    height: 1px;
+    background-color: var(--border);
+    margin: 20px 0;
+    border: none;
+}
+
+/* Bottom Bar Area diubah menjadi Sidebar Action */
+.sidebar-action {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.total-block {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.total-label {
+    font-size: 0.8rem;
+    font-weight: 700;
+    color: var(--gray);
+    letter-spacing: 0.5px;
+}
+
+.total-price-empty {
+    font-size: 1.5rem;
+    font-weight: 800;
+    color: #9ca3af;
+}
+
+.total-price-active {
+    font-size: 1.6rem;
+    font-weight: 800;
+    color: var(--black);
+    letter-spacing: -0.5px;
+}
+
+/* Tombol Submit */
+.btn-continue-disabled {
+    width: 100%;
+    padding: 16px;
+    background-color: #e5e7eb;
+    color: #9ca3af;
+    font-weight: 700;
+    font-size: 0.95rem;
+    border-radius: 12px;
+    border: none;
+    cursor: not-allowed;
+}
+
+.btn-continue-active {
+    width: 100%;
+    background-color: var(--black);
+    color: var(--white);
+    border: none;
+    padding: 16px;
+    border-radius: 12px;
+    font-weight: 700;
+    font-size: 0.95rem;
+    cursor: pointer;
+    box-shadow: 0 4px 12px rgba(17, 17, 17, 0.15);
+    transition: all 0.2s ease;
+}
+
+.btn-continue-active:hover {
+    background-color: #222222;
+    color: var(--gold);
+}
+
+/* Responsive breakpoint */
+@media (max-width: 992px) {
+    .selection-layout {
+        grid-template-columns: 1fr;
+    }
+    .sidebar-right {
+        position: relative;
+        top: 0;
+    }
+}

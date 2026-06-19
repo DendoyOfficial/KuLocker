@@ -1,9 +1,48 @@
 <?php
 require 'config/auth.php';
+require_once 'config/connection.php';
+
+
 
 $user = $_SESSION['user'];
-?>
 
+$user_id = $user['id'];
+
+// Data lokasi loker (unik, dikelompokkan per gedung)
+$lokasi_list = [];
+$res_lok = mysqli_query($conn, "
+    SELECT lokasi,
+           COUNT(*) AS total,
+           SUM(status = 'tersedia') AS tersedia
+    FROM lockers
+    GROUP BY lokasi
+    ORDER BY lokasi ASC
+");
+if ($res_lok) {
+    while ($row = mysqli_fetch_assoc($res_lok)) {
+        $lokasi_list[] = $row;
+    }
+}
+
+// Pengumuman
+$pengumuman_list = [];
+$res_p = mysqli_query($conn, "SELECT * FROM pengumuman LIMIT 6");
+if ($res_p) {
+    while ($row = mysqli_fetch_assoc($res_p)) {
+        $pengumuman_list[] = $row;
+    }
+}
+
+// Fungsi meta pengumuman
+function pengumuman_meta($kategori) {
+    switch ($kategori) {
+        case 'promo':       return ['icon' => 'ti-tag',            'color' => 'green',  'label' => 'Promo'];
+        case 'peringatan':  return ['icon' => 'ti-alert-triangle', 'color' => 'red',    'label' => 'Peringatan'];
+        case 'maintenance': return ['icon' => 'ti-tool',           'color' => 'orange', 'label' => 'Maintenance'];
+        default:            return ['icon' => 'ti-info-circle',    'color' => 'blue',   'label' => 'Info'];
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="id">
 <head>
@@ -12,128 +51,220 @@ $user = $_SESSION['user'];
     <title>Dashboard Utama - KuLocker</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"
-     integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY="
-     crossorigin=""/>
-
-    <link
-    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
-    rel="stylesheet"
-  />
-
-    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet" />
-
-    <link rel="stylesheet" href="css/dashboard-utama.css" />
+          integrity="sha256-p4NxAoJBhIIN+hmNHrzRCf9tD/miZyoHS5obTRR9BMY=" crossorigin=""/>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet"/>
+    <link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@400;500;600&display=swap" rel="stylesheet"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@tabler/icons-webfont@latest/tabler-icons.min.css"/>
+    <link rel="stylesheet" href="css/dashboard-utama.css"/>
 </head>
 <body>
-            <!-- ═══════════════ NAVBAR ═══════════════ -->
-    <nav>
+
+<!-- ═══════════════ NAVBAR ═══════════════ -->
+<nav>
     <div class="nav-inner">
         <div class="nav-logo-icon">
             <img src="img/Kulocker.jpeg" alt="Logo Kulocker">
         </div>
 
-        <div class="nav-links" id="navLinks">
-        <a href="#hero">Home</a>
-        <a href="#features">Features</a>
-        <a href="#tempat-maps">Location</a>
-        <a href="#faq">Help</a>
+        <div class="nav-search-bar" onclick="openMap()">
+            <i class="ti ti-search"></i>
+            <input type="text" placeholder="Cari Lokasi" readonly />
         </div>
 
-        <div class="user-menu">
-            <span class="user-name">
-                <?= $user['full_name']; ?>
-            </span>
+        <div class="user-menu" id="userMenu">
+            <div class="user-trigger" onclick="toggleDropdown(event)">
+                <span class="user-name"><?= htmlspecialchars($user['nama']) ?></span>
+                <div class="profil">
+                    <img src="img/profl.png" alt="user">
+                </div>
+            </div>
 
-            <a href="config/logout.php" class="logout-btn">
-                Logout
+            <div class="dropdown-menu" id="dropdownMenu">
+                <a href="profil.php"><i class="ti ti-user"></i> Profil Page</a>
+                <a href="settings.php"><i class="ti ti-settings"></i> Settings</a>
+                <a href="keluhan.php"><i class="ti ti-message-report"></i> Keluhan</a>
+                <a href="#faq"><i class="ti ti-help-circle"></i> Bantuan</a>
+                <hr class="dropdown-divider">
+                <a href="config/logout.php" class="logout-link"><i class="ti ti-logout"></i> Logout</a>
+            </div>
+        </div>
+    </div>
+</nav>
+
+<!-- ═══════════════ CAROUSEL ═══════════════ -->
+<div class="carousel" id="carousel">
+
+    <div class="slide active">
+        <div class="slide-bg" style="background: linear-gradient(135deg, #1a1a1a 0%, #2d2010 100%);"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+            <div class="slide-tag">UNIVERSITAS MATARAM</div>
+            <div class="slide-title">
+                Welcome back, <em><?= htmlspecialchars(explode(' ', $user['nama'])[0]) ?></em>
+            </div>
+            <div class="slide-desc">Pesan loker kapan saja, akses dengan kode, dan pantau status penyimpanan kamu secara real-time.</div>
+            <button class="slide-btn"onclick="openMap()"><i class="ti ti-lock-square"></i> Pesan Loker Sekarang</button>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-bg" style="background: linear-gradient(135deg, #0d1a2d 0%, #1a2d1a 100%);"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+            <div class="slide-tag">FITUR BARU</div>
+            <div class="slide-title">Temukan Loker <em>Terdekat</em> dari Lokasimu</div>
+            <div class="slide-desc">Gunakan fitur peta interaktif OpenStreetMap untuk menemukan loker yang paling dekat dengan kamu.</div>
+            <button class="slide-btn" onclick="openMap()"><i class="ti ti-map-pin"></i> Cari Loker Terdekat</button>
+        </div>
+    </div>
+
+    <div class="slide">
+        <div class="slide-bg" style="background: linear-gradient(135deg, #1a0d2d 0%, #2d1a0d 100%);"></div>
+        <div class="slide-overlay"></div>
+        <div class="slide-content">
+            <div class="slide-tag">KEAMANAN</div>
+            <div class="slide-title">Akses Aman dengan <em>Verifikasi</em> WhatsApp</div>
+            <div class="slide-desc">Setiap pemesanan dilindungi dengan verifikasi OTP melalui WhatsApp untuk keamanan maksimal.</div>
+            <a href="panduan.php" class="slide-btn"><i class="ti ti-shield-check"></i> Pelajari Lebih Lanjut</a>
+        </div>
+    </div>
+
+    <div class="carousel-arrow left" onclick="prevSlide()"><i class="ti ti-chevron-left"></i></div>
+    <div class="carousel-arrow right" onclick="nextSlide()"><i class="ti ti-chevron-right"></i></div>
+    <div class="carousel-nav" id="carouselNav"></div>
+</div>
+
+<!-- ═══════════════ FEATURE BUTTONS ═══════════════ -->
+<div class="feature-section">
+  <div class="feature-section-inner">
+    <div class="feature-label">FITUR UTAMA</div>
+    <div class="feature-grid">
+        <a href="my-loker.php" class="feature-btn">
+            <div class="feature-icon gold"><i class="ti ti-layout-grid"></i></div>
+            <div class="feature-name">My Locker</div>
+            <div class="feature-desc">Status loker aktif & QR Code pemesanan</div>
+        </a>
+        <div class="feature-btn" onclick="openMap()">
+            <div class="feature-icon blue"><i class="ti ti-map-pin"></i></div>
+            <div class="feature-name">Pesan Loker</div>
+            <div class="feature-desc">Temukan loker terdekat via peta</div>
+        </div>
+        <a href="riwayat.php" class="feature-btn">
+            <div class="feature-icon green"><i class="ti ti-history"></i></div>
+            <div class="feature-name">Riwayat</div>
+            <div class="feature-desc">Riwayat penyimpanan loker kamu</div>
+        </a>
+        <a href="notifikasi.php" class="feature-btn">
+            <div class="feature-icon red"><i class="ti ti-bell"></i></div>
+            <div class="feature-name">Notifikasi</div>
+            <div class="feature-desc">Pantau status dan pengingat sewa</div>
+        </a>
+    </div>
+  </div>
+</div>
+
+<!-- ═══════════════ PENGUMUMAN ═══════════════ -->
+
+<?php if (!empty($pengumuman_list)): ?>
+<section class="pengumuman-section">
+    <div class="pengumuman-inner">
+        <div class="pengumuman-header">
+            <div>
+                <div class="feature-label">PENGUMUMAN</div>
+                <h2 class="pengumuman-title">Info & Pengumuman</h2>
+            </div>
+            <a href="pengumuman-list.php" class="pengumuman-lihat-semua">
+                Lihat semua <i class="ti ti-arrow-right"></i>
             </a>
-
+        </div>
+        <div class="pengumuman-grid">
+            <?php foreach ($pengumuman_list as $p):
+                $meta        = pengumuman_meta($p['kategori']);
+                $tanggal     = date('d M Y', strtotime($p['created_at']));
+                $isi_singkat = mb_strlen($p['isi']) > 120 ? mb_substr($p['isi'], 0, 120) . '...' : $p['isi'];
+            ?>
+            <div class="pengumuman-card reveal">
+                <div class="pengumuman-card-top">
+                    <div class="pengumuman-badge <?= $meta['color'] ?>">
+                        <i class="ti <?= $meta['icon'] ?>"></i> <?= $meta['label'] ?>
+                    </div>
+                    <span class="pengumuman-tanggal"><?= $tanggal ?></span>
+                </div>
+                <h3 class="pengumuman-judul"><?= htmlspecialchars($p['judul']) ?></h3>
+                <p class="pengumuman-isi"><?= htmlspecialchars($isi_singkat) ?></p>
+                <?php if ($p['expired_at']): ?>
+                <div class="pengumuman-expired">
+                    <i class="ti ti-clock"></i>
+                    Berlaku hingga <?= date('d M Y', strtotime($p['expired_at'])) ?>
+                </div>
+                <?php endif; ?>
+            </div>
+            <?php endforeach; ?>
         </div>
     </div>
-    </nav>
-        <!-- ═══════════════ HERO ═══════════════ -->
-    <section id="hero">
-    <div class="hero-radial-1"></div>
-    <div class="hero-radial-2"></div>
+</section>
+<?php endif; ?>
 
-    <div class="hero-inner">
-        <div class="hero-grid">
-        <div class="reveal">
-            <div class="hero-badge">
-            <span>Coming sooon</span>
-            </div>
 
-            <h1 class="hero-title">
-            Welcome back <br>
-            <span class="gold-text">
-                <?= $user['full_name']; ?>
-            </span>
-            </h1>
-
-            <p class="hero-subtitle">
-            Pesan jasa locker nya gaskeun
-            </p>
-
-            <div class="hero-btns">
-            <button class="btn-dark" onclick="window.location.href='sign-in.html'"> Daftar sekarang</button>
-            </div>
-        </div>
-        </div>
-    </div>
-    </section>
-    <!-- ═══════════════ FOOTER ═══════════════ -->
-    <footer>
+<!-- ═══════════════ FOOTER ═══════════════ -->
+<footer>
     <div class="footer-inner">
-        <div class="footer-grid">
-        <div class="footer-brand">
-            <div class="footer-logo-icon">
-            <img src="img/Kulocker.jpeg" alt="Logo Kulocker">
-        </div>
-            <p>Secure smart locker solutions for modern delivery. Making package management simple, safe, and accessible 24/7.</p>
-            <div class="social-links">
-            <a href="#" class="social-link" aria-label="Twitter">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M22 4s-.7 2.1-2 3.4c1.6 10-9.4 17.3-18 11.6 2.2.1 4.4-.6 6-2C3 15.5.5 9.6 3 5c2.2 2.6 5.6 4.1 9 4-.9-4.2 4-6.6 7-3.8 1.1 0 3-1.2 3-1.2z"/></svg>
-            </a>
-            <a href="#" class="social-link" aria-label="LinkedIn">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"/><rect width="4" height="12" x="2" y="9"/><circle cx="4" cy="4" r="2"/></svg>
-            </a>
-            <a href="#" class="social-link" aria-label="Instagram">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="20" x="2" y="2" rx="5" ry="5"/><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"/><line x1="17.5" x2="17.51" y1="6.5" y2="6.5"/></svg>
-            </a>
-            <a href="#" class="social-link" aria-label="Email">
-                <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="20" height="16" x="2" y="4" rx="2"/><path d="m22 7-8.97 5.7a1.94 1.94 0 0 1-2.06 0L2 7"/></svg>
-            </a>
-            </div>
-        </div>
-        <div class="footer-col">
-            <h3>NAVIGATION</h3>
-            <ul>
-            <li><a href="#">Home</a></li>
-            <li><a href="#">Location</a></li>
-            <li><a href="#">Bantuan</a></li>
-            </ul>
-        </div>
-        <div class="tanpa-hover">
-            <h3>CONTACT</h3>
-            <ul>
-            <li> <p>082102924</p></li>
-            <li> <p>@KuLocker</p></li>
-            <li> <p>Jl. Sepatu dua belas. Kiri kanan kotak x segitiJga</p> </li>
-            </ul>
-        </div>
-        <div class="footer-col">
-            <h3>LEGALITAS</h3>
-            <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Cookie Policy</a></li>
-            </ul>
-        </div>
-        </div>
         <div class="footer-bottom">
-        <p class="footer-copy">© 2026 Kulocker. All rights reserved.</p>
+            <p class="footer-copy">© 2026 Kulocker. All rights reserved.</p>
         </div>
     </div>
-    </footer>
+</footer>
+
+<!-- ═══════════════ MAP MODAL ═══════════════ -->
+<div class="modal-overlay" id="mapModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title"><i class="ti ti-map-2"></i> Cari Loker Terdekat</div>
+            <button class="modal-close" id="mapClose"><i class="ti ti-x"></i></button>
+        </div>
+        <div class="modal-search">
+            <div class="modal-search-bar">
+                <i class="ti ti-search"></i>
+                <input type="text" id="mapSearch" placeholder="Cari gedung atau kode loker..."/>
+            </div>
+            <button class="btn-gps" id="gpsBtn">
+                <i class="ti ti-current-location"></i> Lokasi Saya
+            </button>
+        </div>
+
+        <?php if (!empty($lokasi_list)): ?>
+        <div class="modal-lokasi-wrap">
+            <div class="modal-lokasi-label">Pilih Lokasi</div>
+            <div class="modal-lokasi-grid" id="modalLokasiGrid">
+                <?php foreach ($lokasi_list as $lok):
+                    $slug         = urlencode($lok['lokasi']);
+                    $status_class = $lok['tersedia'] > 0 ? 'ada' : 'penuh';
+                    $status_label = $lok['tersedia'] > 0 ? $lok['tersedia'] . ' tersedia' : 'Penuh';
+                ?>
+                <a href="locker-selection.php?lokasi=<?= $slug ?>"
+                   class="modal-lokasi-card"
+                   data-lokasi="<?= strtolower(htmlspecialchars($lok['lokasi'])) ?>">
+                    <div class="modal-lokasi-icon">
+                        <i class="ti ti-building"></i>
+                    </div>
+                    <div class="modal-lokasi-info">
+                        <span class="modal-lokasi-name"><?= htmlspecialchars($lok['lokasi']) ?></span>
+                        <span class="modal-lokasi-sub"><?= $lok['total'] ?> loker</span>
+                    </div>
+                    <span class="modal-lokasi-badge <?= $status_class ?>"><?= $status_label ?></span>
+                </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+        <div id="map"></div>
+        <div class="modal-list" id="lokerList"></div>
+    </div>
+</div>
+
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
+        integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/pnHo=" crossorigin=""></script>
+<script src="js/dashboard-utama.js"></script>
 </body>
 </html>

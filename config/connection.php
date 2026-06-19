@@ -21,4 +21,3 @@ if(!$conn){
 
 }
 
-echo "Database connected";

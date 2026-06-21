@@ -9,12 +9,11 @@ if (!$conn) {
 }
 
 // 2. ID USER SEMENTARA 
-// (Nanti ganti dengan $_SESSION['id_user'] kalau sistem login kamu sudah jalan)
-$id_user = 1; 
+$_SESSION['id_user'] = 1; 
 
 // 3. PROSES SIMPAN DATA (JIKA TOMBOL 'SIMPAN PERUBAHAN' DIKLIK)
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Tangkap data dari atribut name="" di HTML kamu
+    
     $nama_baru = $_POST['nama'];
     $nim_baru = $_POST['nim'];
     $alamat_baru = $_POST['alamat'];
@@ -22,9 +21,6 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     $hp_baru = $_POST['hp'];
     $password_baru = $_POST['password'];
 
-    // Update ke tabel users. 
-    // Catatan: Pastikan nama kolom di phpMyAdmin kamu adalah: nama_lengkap, nim, alamat, email, phone, password.
-    // Jika nama kolom HP di database kamu beda (misal: no_hp), ganti tulisan 'phone' di bawah menjadi 'no_hp'.
     $query_update = "UPDATE users SET 
                      nama_lengkap = '$nama_baru', 
                      nim = '$nim_baru', 
@@ -32,23 +28,23 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
                      email = '$email_baru', 
                      phone = '$hp_baru', 
                      password = '$password_baru' 
-                     WHERE id = '$id_user'";
+                     WHERE id = '{$_SESSION['id_user']}'";
     
     mysqli_query($conn, $query_update);
     
-    // Refresh halaman agar data terbaru langsung tampil
     header("Location: " . $_SERVER['PHP_SELF']);
     exit;
 }
 
 // 4. AMBIL DATA DARI DATABASE UNTUK DITAMPILKAN
-$query_tampil = "SELECT * FROM users WHERE id = '$id_user'";
+$query_tampil = "SELECT * FROM users WHERE id = '{$_SESSION['id_user']}'";
 $result = mysqli_query($conn, $query_tampil);
 
 if (mysqli_num_rows($result) > 0) {
     $profil = mysqli_fetch_assoc($result);
 } else {
-    // Data dummy kalau database masih kosong agar tidak error
+
+//Dummy buat base biar bisa nyimpen dulu sementara
     $profil = [
         'nama_lengkap' => 'M. Arya', 
         'nim' => '0000011122244456', 
@@ -93,6 +89,7 @@ if (mysqli_num_rows($result) > 0) {
               "
             />
           </div>
+          
           <!-- Nama di kiri otomatis ikut database -->
           <h2><?= htmlspecialchars($profil['nama_lengkap'] ?? 'Raka Ganteng') ?></h2>
           <p class="subtitle">Mahasiswa, UNRAM</p>
@@ -162,7 +159,7 @@ if (mysqli_num_rows($result) > 0) {
               </div>
               <div class="form-group">
                 <label>Password</label>
-                <!-- Menampilkan password asli kurang aman, biasanya dibiarkan kosong, tapi saya sesuaikan dengan strukturmu -->
+                
                 <input type="password" name="password" value="<?= htmlspecialchars($profil['password'] ?? '') ?>" />
               </div>
 
@@ -184,21 +181,21 @@ if (mysqli_num_rows($result) > 0) {
 
     <script>
       function toggleMode(mode) {
-        // Ambil elemen-elemen yang mau disembunyikan/ditampilkan
+       
         const viewMode = document.getElementById("viewMode");
         const editMode = document.getElementById("editMode");
         const btnEditHero = document.getElementById("btnEditHero");
         const btnCoverHero = document.getElementById("btnCoverHero");
 
         if (mode === "edit") {
-          // Sembunyikan Fix, Munculkan Edit
+         
           if(viewMode) viewMode.classList.add("d-none");
           if(btnEditHero) btnEditHero.classList.add("d-none");
 
           if(editMode) editMode.classList.remove("d-none");
           if(btnCoverHero) btnCoverHero.classList.remove("d-none");
         } else {
-          // Sembunyikan Edit, Munculkan Fix
+         
           if(viewMode) viewMode.classList.remove("d-none");
           if(btnEditHero) btnEditHero.classList.remove("d-none");
 

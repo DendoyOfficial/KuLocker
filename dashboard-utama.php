@@ -28,7 +28,6 @@ $res_lok = mysqli_query($conn, "
     GROUP BY lokasi
     ORDER BY lokasi ASC
 ");
-
 if ($res_lok) {
     while ($row = mysqli_fetch_assoc($res_lok)) {
         $lokasi_list[] = $row;
@@ -125,20 +124,9 @@ function pengumuman_meta($kategori) {
         <div class="slide-overlay"></div>
         <div class="slide-content">
             <div class="slide-tag">FITUR BARU</div>
-            <div class="slide-title">Temukan Loker <em>Terdekat</em> dari Lokasimu</div>
-            <div class="slide-desc">Gunakan fitur peta interaktif OpenStreetMap untuk menemukan loker yang paling dekat dengan kamu.</div>
+            <div class="slide-title">Titip <em>Barang</em> kamu sekarang</div>
+            <div class="slide-desc">Titip Beban Barang Bawaan Kamu dengan Aman dan Nyaman .</div>
             <button class="slide-btn" onclick="openMap()"><i class="ti ti-map-pin"></i> Cari Loker Terdekat</button>
-        </div>
-    </div>
-
-    <div class="slide">
-        <div class="slide-bg" style="background: linear-gradient(135deg, #1a0d2d 0%, #2d1a0d 100%);"></div>
-        <div class="slide-overlay"></div>
-        <div class="slide-content">
-            <div class="slide-tag">KEAMANAN</div>
-            <div class="slide-title">Akses Aman dengan <em>Verifikasi</em> WhatsApp</div>
-            <div class="slide-desc">Setiap pemesanan dilindungi dengan verifikasi OTP melalui WhatsApp untuk keamanan maksimal.</div>
-            <a href="panduan.php" class="slide-btn"><i class="ti ti-shield-check"></i> Pelajari Lebih Lanjut</a>
         </div>
     </div>
 

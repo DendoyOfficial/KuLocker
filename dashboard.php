@@ -270,14 +270,6 @@
           </li>
         </ul>
       </div>
-        <div class="footer-col">
-          <h3>LEGALITAS</h3>
-          <ul>
-            <li><a href="#">Privacy Policy</a></li>
-            <li><a href="#">Terms of Service</a></li>
-            <li><a href="#">Cookie Policy</a></li>
-          </ul>
-        </div>
     </div>
     <div class="footer-bottom">
       <p class="footer-copy">© 2026 Kulocker. All rights reserved.</p>

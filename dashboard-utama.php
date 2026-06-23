@@ -28,6 +28,7 @@ $res_lok = mysqli_query($conn, "
     GROUP BY lokasi
     ORDER BY lokasi ASC
 ");
+
 if ($res_lok) {
     while ($row = mysqli_fetch_assoc($res_lok)) {
         $lokasi_list[] = $row;
@@ -159,7 +160,7 @@ function pengumuman_meta($kategori) {
         <div class="feature-btn" onclick="openMap()">
             <div class="feature-icon blue"><i class="ti ti-map-pin"></i></div>
             <div class="feature-name">Pesan Loker</div>
-            <div class="feature-desc">Temukan loker terdekat via peta</div>
+            <div class="feature-desc">Titipkan barang kamu sekarang</div>
         </div>
         <a href="riwayat-sewa.php" class="feature-btn">
             <div class="feature-icon green"><i class="ti ti-history"></i></div>

@@ -93,6 +93,9 @@ $admin_avatar = strtoupper(substr($kata[0], 0, 1)) . (isset($kata[1]) ? strtoupp
             <li class="<?= ($page == 'riwayat') ? 'active' : ''; ?>">
                 <a href="admin.php?page=riwayat">Log Transaksi / Riwayat</a>
             </li>
+            <li class="<?= ($page == 'pesan_keluar') ? 'active' : ''; ?>">
+                <a href="admin.php?page=pesan_keluar">Pesan Keluar</a>
+            </li>
             <li class="<?= ($page == 'inbox') ? 'active' : ''; ?>">
                 <a href="admin.php?page=inbox">Inbox / Pesan Masuk</a>
             </li>
@@ -628,6 +631,29 @@ $admin_avatar = strtoupper(substr($kata[0], 0, 1)) . (isset($kata[1]) ? strtoupp
                             <div id="detail-pemesanan-status">-</div>
                         </div>
                         <button onclick="tutupModalPemesanan()" style="width:100%; background-color:#6c757d; color:white; padding:10px; border:none; border-radius:6px; font-weight:600; cursor:pointer;">Tutup</button>
+                    </div>
+                </div>
+
+            <?php elseif ($page == 'pesan_keluar'): ?>
+                <div class="card">
+                    <div class="card-title">Pesan Keluar</div>
+                    <div class="table-responsive">
+                        <table class="locker-table">
+                            <thead>
+                                <tr>
+                                    <th>Waktu</th>
+                                    <th>Penerima</th>
+                                    <th>Jenis Pesan</th>
+                                    <th>Status Pengiriman</th>
+                                    <th style="text-align: center; width: 20%;">Preview</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td colspan="5" style="text-align:center; padding:20px; color:#718096;">Belum ada pesan keluar. Riwayat notifikasi dan broadcast WA akan muncul di sini.</td>
+                                </tr>
+                            </tbody>
+                        </table>
                     </div>
                 </div>
 

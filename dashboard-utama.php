@@ -28,6 +28,7 @@ $res_lok = mysqli_query($conn, "
     GROUP BY lokasi
     ORDER BY lokasi ASC
 ");
+
 if ($res_lok) {
     while ($row = mysqli_fetch_assoc($res_lok)) {
         $lokasi_list[] = $row;
@@ -201,7 +202,49 @@ function pengumuman_meta($kategori) {
 </section>
 <?php endif; ?>
 
+<!-- ═══════════════ MAP MODAL ═══════════════ -->
+<div class="modal-overlay" id="mapModal">
+    <div class="modal">
+        <div class="modal-header">
+            <div class="modal-title"><i class="ti ti-map-2"></i> Cari Loker Terdekat</div>
+            <button class="modal-close" id="mapClose"><i class="ti ti-x"></i></button>
+        </div>
+        <div class="modal-search">
+            <div class="modal-search-bar">
+                <i class="ti ti-search"></i>
+                <input type="text" id="mapSearch" placeholder="Cari gedung atau kode loker..."/>
+            </div>
+        </div>
 
+        <?php if (!empty($lokasi_list)): ?>
+        <div class="modal-lokasi-wrap">
+            <div class="modal-lokasi-label">Pilih Lokasi</div>
+            <div class="modal-lokasi-grid" id="modalLokasiGrid">
+                <?php foreach ($lokasi_list as $lok):
+                    $slug         = urlencode($lok['lokasi']);
+                    $status_class = $lok['tersedia'] > 0 ? 'ada' : 'penuh';
+                    $status_label = $lok['tersedia'] > 0 ? $lok['tersedia'] . ' tersedia' : 'Penuh';
+                ?>
+                <a href="locker-selection.php?lokasi=<?= $slug ?>"
+                   class="modal-lokasi-card"
+                   data-lokasi="<?= strtolower(htmlspecialchars($lok['lokasi'])) ?>">
+                    <div class="modal-lokasi-icon">
+                        <i class="ti ti-building"></i>
+                    </div>
+                    <div class="modal-lokasi-info">
+                        <span class="modal-lokasi-name"><?= htmlspecialchars($lok['lokasi']) ?></span>
+                        <span class="modal-lokasi-sub"><?= $lok['total'] ?> loker</span>
+                    </div>
+                    <span class="modal-lokasi-badge <?= $status_class ?>"><?= $status_label ?></span>
+                </a>
+                <?php endforeach; ?>
+            </div>
+        </div>
+        <?php endif; ?>
+        <div id="map"></div>
+        <div class="modal-list" id="lokerList"></div>
+    </div>
+</div>
 <!-- ═══════════════ FOOTER ═══════════════ -->
 <footer>
     <div class="footer-inner">

@@ -78,7 +78,7 @@
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect width="5" height="5" x="3" y="3" rx="1"/><rect width="5" height="5" x="16" y="3" rx="1"/><rect width="5" height="5" x="3" y="16" rx="1"/><path d="M21 16h-3a2 2 0 0 0-2 2v3"/><path d="M21 21v.01"/><path d="M12 7v3a2 2 0 0 1-2 2H7"/><path d="M3 12h.01"/><path d="M12 3h.01"/><path d="M12 16v.01"/><path d="M16 12h1"/><path d="M21 12v.01"/><path d="M12 21v-1"/></svg>
         </div>
         <h3 class="feature-title">QR Access</h3>
-        <p class="feature-desc">Akses pintu loker Anda secara instan menggunakan pemindaian QR-code atau kode akses unik tanpa kunci fisik.</p>
+        <p class="feature-desc">Akses pintu loker Anda secara instan menggunakan QR Code tanpa kunci fisik.</p>
       </div>
 
       <div class="feature-card reveal">
@@ -107,14 +107,6 @@
 
       <div class="feature-card reveal">
         <div class="feature-icon">
-          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 8a6 6 0 0 1 12 0c0 7 3 9 3 9H3s3-2 3-9"/><path d="M10.3 21a1.94 1.94 0 0 0 3.4 0"/></svg>
-        </div>
-        <h3 class="feature-title">Smart Notifications</h3>
-        <p class="feature-desc">Dapatkan pengingat otomatis saat durasi penyewaan Anda akan segera berakhir agar terhindar dari biaya denda penalti.</p>
-      </div>
-
-      <div class="feature-card reveal">
-        <div class="feature-icon">
           <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><polyline points="12 6 12 12 16 14"/></svg>
         </div>
         <h3 class="feature-title">24/7 Access</h3>
@@ -128,7 +120,7 @@
 <section id="tempat-maps">
   <div class="text-center reveal">
     <div class="section-badge"><span>Location</span></div>
-    <h1 class="section-title">Maps User Location</h1>
+    <h1 class="section-title">Maps Location</h1>
   </div>
   <div class="maps" id="maps"></div>
   <div></div>

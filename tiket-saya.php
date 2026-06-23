@@ -3,7 +3,7 @@
 require 'config/auth.php';
 require_once 'config/connection.php';
 
-// 🟢 PERBAIKAN UTAMA: Samakan zona waktu PHP di file ini dengan api/cron-pengingat.php
+// Zona Wita
 date_default_timezone_set('Asia/Makassar'); 
 
 $user_id = $_SESSION['user']['id'] ?? 10;

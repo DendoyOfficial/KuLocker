@@ -3,16 +3,16 @@
 require 'config/auth.php'; 
 require_once 'config/connection.php';
 
-// 1. Tangkap parameter lokasi dari URL
+// Tangkap parameter lokasi dari URL
 if (!isset($_GET['lokasi']) || empty($_GET['lokasi'])) {
     header("Location: dashboard-utama.php"); 
     exit;
 }
 
 // Proses sewa loker
-date_default_timezone_set('Asia/Makassar'); // 🟢 Pastikan ini ada di atas
+date_default_timezone_set('Asia/Makassar'); 
 
-$durasi_sewa_jam = 1; // Diambil dari pilihan user (1 jam)
+$durasi_sewa_jam = 1; 
 
 // Menghitung tanggal selesai secara presisi menggunakan format datetime MySQL
 $tanggal_mulai = date('Y-m-d H:i:s');
@@ -20,13 +20,13 @@ $tanggal_selesai = date('Y-m-d H:i:s', strtotime("+$durasi_sewa_jam hour"));
 
 $lokasi_terpilih = $_GET['lokasi'];
 
-// 2. QUERY UTAMA: Mengambil data loker sekaligus sisa waktu pemesanan yang masih aktif
+// QUERY ngambil data loker sekaligus sisa waktu pemesanan yang masih aktif
 $lockers_list = [];
 $query = "SELECT l.id, l.kode_loker, l.ukuran, l.status, p.tanggal_selesai 
-          FROM lockers l 
-          LEFT JOIN pemesanan p ON l.id = p.locker_id AND p.status = 'aktif'
-          WHERE l.lokasi = ? AND (l.is_deleted = 0 OR l.is_deleted IS NULL) 
-          ORDER BY l.kode_loker ASC";
+        FROM lockers l 
+        LEFT JOIN pemesanan p ON l.id = p.locker_id AND p.status = 'aktif'
+        WHERE l.lokasi = ? AND (l.is_deleted = 0 OR l.is_deleted IS NULL) 
+        ORDER BY l.kode_loker ASC";
 
 $stmt = mysqli_prepare($conn, $query);
 mysqli_stmt_bind_param($stmt, "s", $lokasi_terpilih);
@@ -106,7 +106,7 @@ if ($result) {
                                     $waktu_sekarang = time();
                                     $selisih_detik = $waktu_selesai - $waktu_sekarang;
 
-                                    // 🟢 LOGIKA CERDAS: Jika waktu sewa di DB sudah lewat/habis
+                                    // LOGIKA pas waktu sewa di DB sudah lewat/habis
                                     if ($selisih_detik <= 0) {
                                         $tooltip_teks = "🔒 Terkunci (Waktu Penggunaan Habis)";
                                     } else {

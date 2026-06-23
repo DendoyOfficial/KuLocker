@@ -12,9 +12,9 @@ $data_sewa = null;
 if ($pemesanan_id > 0) {
     // LANGSUNG QUERY AMBIL RINCIAN: Karena status di DB sudah otomatis diset 'aktif' oleh file proses
     $query_select_sewa = "SELECT p.tanggal_mulai, p.kode_akses, l.kode_loker, l.lokasi 
-                          FROM pemesanan p 
-                          JOIN lockers l ON p.locker_id = l.id 
-                          WHERE p.id = ?";
+                        FROM pemesanan p 
+                        JOIN lockers l ON p.locker_id = l.id 
+                        WHERE p.id = ?";
     $stmt_sewa = mysqli_prepare($conn, $query_select_sewa);
     mysqli_stmt_bind_param($stmt_sewa, "i", $pemesanan_id);
     mysqli_stmt_execute($stmt_sewa);

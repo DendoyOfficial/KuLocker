@@ -1,8 +1,10 @@
 <?php
+
 // api/proses-sewa-langsung.php
 date_default_timezone_set('Asia/Makassar'); 
+
 require_once '../config/connection.php';
-require_once '../config/auth.php'; // 🟢 Aktifkan ini agar proteksi login & session user berjalan lurus
+require_once '../config/auth.php'; 
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     header("Location: ../locker-selection.php");
@@ -26,7 +28,7 @@ if ($durasi_jam < 1 || $durasi_jam > 3 || $locker_id === 0) {
     exit;
 }
 
-// --- LOGIKA DATABASE KULOCKER BARU (MENGGUNAKAN JAM RIIL) ---
+// --- LOGIKA DATABASE KULOCKER BARU ---
 $sekarang = time(); // Ambil timestamp detik saat ini
 $tanggal_mulai = date('Y-m-d H:i:s', $sekarang); 
 
@@ -36,20 +38,20 @@ $tanggal_selesai = date('Y-m-d H:i:s', $waktu_selesai_timestamp);
 
 $kode_akses_dummy = strval(rand(100000, 999999));
 
-// 1. Insert ke tabel pemesanan dengan status langsung 'aktif'
+// Insert ke tabel pemesanan dengan status langsung 'aktif'
 $query_order = "INSERT INTO pemesanan (user_id, locker_id, tanggal_mulai, tanggal_selesai, status, kode_akses) VALUES (?, ?, ?, ?, 'aktif', ?)";
 $stmt_order = mysqli_prepare($conn, $query_order);
 mysqli_stmt_bind_param($stmt_order, "iisss", $user_id, $locker_id, $tanggal_mulai, $tanggal_selesai, $kode_akses_dummy);
 mysqli_stmt_execute($stmt_order);
 $pemesanan_id = mysqli_insert_id($conn);
 
-// 2. Insert ke tabel pembayaran (status lunas agar history database tidak crash)
+// Insert ke tabel pembayaran (status lunas agar history database tidak crash)
 $query_pay = "INSERT INTO pembayaran (pemesanan_id, jumlah, metode, status, bukti) VALUES (?, 0, 'gratis', 'lunas', NULL)";
 $stmt_pay = mysqli_prepare($conn, $query_pay);
 mysqli_stmt_bind_param($stmt_pay, "i", $pemesanan_id);
 mysqli_stmt_execute($stmt_pay);
 
-// 3. Update status loker di tabel lockers menjadi 'terpakai'
+// Update status loker di tabel lockers menjadi 'terpakai'
 $query_update_locker = "UPDATE lockers SET status = 'terpakai' WHERE id = ?";
 $stmt_lkr = mysqli_prepare($conn, $query_update_locker);
 mysqli_stmt_bind_param($stmt_lkr, "i", $locker_id);

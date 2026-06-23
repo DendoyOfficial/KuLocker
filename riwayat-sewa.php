@@ -7,13 +7,12 @@ $user = $_SESSION['user'];
 $user_id = $user['id'];
 
 // 2. Query mengambil seluruh riwayat transaksi sewa yang SUDAH TIDAK AKTIF
-// 🟢 Pastikan query di file riwayat-sewa.php kamu pas seperti ini:
 $query_riwayat = "SELECT p.*, l.kode_loker, l.lokasi, l.ukuran 
-                  FROM pemesanan p
-                  JOIN lockers l ON p.locker_id = l.id
-                  WHERE p.user_id = '$user_id' 
+                FROM pemesanan p
+                JOIN lockers l ON p.locker_id = l.id
+                WHERE p.user_id = '$user_id' 
                     AND p.status IN ('selesai', 'dibatalkan')
-                  ORDER BY p.id DESC";
+                ORDER BY p.id DESC";
 
 $result = mysqli_query($conn, $query_riwayat);
 ?>

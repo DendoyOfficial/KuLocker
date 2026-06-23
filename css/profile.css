@@ -96,6 +96,43 @@ body {
   border: 1px solid var(--gold-bdr);
 }
 
+/* Compact brand with back button */
+.brand-with-back {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.brand-with-back .brand-back {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 10px;
+  border-radius: 999px;
+  font-weight: 600;
+  color: var(--text);
+  text-decoration: none;
+  background: transparent;
+  border: 1px solid transparent;
+  transition: background 0.12s, border-color 0.12s, color 0.12s;
+}
+.brand-with-back .brand-back i {
+  font-size: 0.95rem;
+}
+.brand-with-back .brand-back:hover {
+  background: var(--gold-bg);
+  border-color: var(--gold);
+  color: var(--gold-hover);
+}
+.brand-with-back .brand-logo {
+  height: 28px;
+  width: auto;
+  display: block;
+}
+@media (max-width: 520px) {
+  .brand-with-back .brand-back { padding: 6px 8px; font-size: 0.88rem; }
+  .brand-with-back .brand-logo { height: 22px; }
+}
+
 /* ── Flash ── */
 .flash {
   margin: 14px 28px 0;

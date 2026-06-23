@@ -18,6 +18,7 @@ if(!$conn){
         "Koneksi database gagal : " .
         mysqli_connect_error()
     );
-
 }
+
+mysqli_query($conn, "SET time_zone = '+08:00'");
 

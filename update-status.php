@@ -1,25 +1,27 @@
 <?php
-$koneksi = mysqli_connect("localhost", "root", "", "kulocker");
+// Panggil file konfigurasi dan keamanan yang sudah Anda buat
+require_once "config/auth.php";       // Menjamin hanya session valid yang bisa masuk
+require_once "config/connection.php"; // Menggunakan koneksi database yang sudah ada ($koneksi)
 
-if (!$koneksi) {
-    die("Koneksi gagal: " . mysqli_connect_error());
+// Pastikan hanya admin yang bisa mengakses file ini
+if ($_SESSION['user']['role'] !== 'admin') {
+    http_response_code(403);
+    exit;
 }
 
 if (isset($_GET['id']) && isset($_GET['status'])) {
     $id = intval($_GET['id']);
-    // Menggunakan trim agar tidak ada spasi yang mengganggu
-    $status = mysqli_real_escape_string($koneksi, trim($_GET['status']));
+    $status = mysqli_real_escape_string($conn, $_GET['status']);
 
+    // Menjalankan query update menggunakan variabel $conn dari connection.php
     $query = "UPDATE lockers SET status = '$status' WHERE id = $id";
-    
-    // Tambahkan header agar respon bersih
-    header('Content-Type: text/plain');
-    
-    if (mysqli_query($koneksi, $query)) {
-        echo "success";
+    if (mysqli_query($conn, $query)) {
+        http_response_code(200); 
     } else {
-        echo "error";
+        http_response_code(500); 
     }
+} else {
+    http_response_code(400); 
 }
-mysqli_close($koneksi);
+
 ?>

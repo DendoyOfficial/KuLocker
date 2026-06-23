@@ -94,8 +94,9 @@ body {
 
 .sidebar-menu li a:hover,
 .sidebar-menu li.active a {
-  background-color: rgba(0, 0, 0, 0.05);
-  color: var(--sidebar-active);
+  background-color: var(--sidebar-active);
+  color: #ffffff;
+  font-weight: 600;
 }
 
 .btn-logout {
@@ -104,10 +105,12 @@ body {
 
 /* ═══════════════ CONTAINER UTAMA (KANAN) ═══════════════ */
 .main-container {
-  margin-left: 260px;
   width: calc(100% - 260px);
+  margin-left: 260px;
+  padding: 20px;
   min-height: 100vh;
   box-sizing: border-box;
+  background-color: var(--bg-main);
 }
 
 /* TOPBAR NAVIGASI ATAS */
@@ -179,7 +182,12 @@ body {
   border-radius: 8px;
   border: 1px solid var(--border-color);
   padding: 25px;
-  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
+  transition: box-shadow 0.3s ease;
+}
+
+.card:hover {
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.12);
 }
 
 .card-title {
@@ -256,9 +264,9 @@ body {
 /* ═══════════════ VISUALISASI GRID BOX LOCKER ═══════════════ */
 .locker-grid-container {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(130px, 1fr));
-  gap: 15px;
-  margin-top: 5px;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  gap: 20px;
+  width: 100%;
 }
 
 .locker-box {
@@ -313,20 +321,20 @@ body {
 
 .status-filled {
   background-color: #fff5f5;
-  color: #e53e3e;
-  border-color: #fed7d7;
+  color: #dd6b20;
+  border-color: #fed7d7 #feebc8;
 }
 .status-filled .box-status-tag {
-  background-color: #fed7d7;
+  background-color: #feebc8;
 }
 
 .status-warning {
   background-color: #fffaf0;
-  color: #dd6b20;
-  border-color: #feebc8;
+  color: #e53e3e;
+  border-color: #fed7d7;
 }
 .status-warning .box-status-tag {
-  background-color: #feebc8;
+  background-color: #fed7d7;
 }
 
 /* ═══════════════ STRUKTUR GLOBAL TABEL DATA ═══════════════ */
@@ -341,16 +349,19 @@ body {
   background-color: #fbc531;
   color: #ffffff;
   border: none;
-  padding: 8px 16px;
+  padding: 10px 20px;
   border-radius: 6px;
   font-size: 13px;
   font-weight: 600;
   cursor: pointer;
-  transition: background 0.2s;
+  transition: all 0.3s ease;
+  box-shadow: 0 2px 4px rgba(251, 197, 49, 0.3);
 }
 
 .btn-action-add:hover {
   background-color: #e1b12c;
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(251, 197, 49, 0.4);
 }
 
 .table-responsive {
@@ -381,6 +392,11 @@ body {
   color: #000000;
 }
 
+.locker-table tbody tr:hover {
+  background-color: #f8f9fa;
+  transition: background-color 0.2s ease;
+}
+
 /* BADGE STATUS YANG ADA DI DALAM TABEL */
 .badge-table {
   font-size: 11px;
@@ -394,11 +410,11 @@ body {
 }
 .badge-danger {
   background-color: #fed7d7;
-  color: #742a2a;
+  color: #744210;
 }
 .badge-warning {
   background-color: #feebc8;
-  color: #744210;
+  color: #742a2a;
 }
 
 /* TOMBOL EDIT & HAPUS */
@@ -444,7 +460,163 @@ body {
   font-size: 14px;
   color: #000000;
   margin-top: auto;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.08);
 }
 .footer-card span {
   color: #e53e3e;
+  font-weight: 600;
+}
+
+/* ═══════════════ FORM ELEMENTS ═══════════════ */
+input[type="text"],
+input[type="email"],
+input[type="password"],
+input[type="number"],
+textarea,
+select {
+  width: 100%;
+  padding: 10px 12px;
+  border: 1px solid #e2e8f0;
+  border-radius: 6px;
+  font-size: 14px;
+  font-family: "Inter", sans-serif;
+  transition: all 0.3s ease;
+  background-color: #ffffff;
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="password"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+  outline: none;
+  border-color: var(--sidebar-active);
+  box-shadow: 0 0 0 3px rgba(251, 197, 49, 0.1);
+}
+
+textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+/* ═══════════════ RESPONSIVE DESIGN ═══════════════ */
+@media (max-width: 1200px) {
+  .main-container {
+    width: calc(100% - 260px);
+    margin-left: 260px;
+    padding: 15px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .locker-grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  }
+}
+
+@media (max-width: 768px) {
+  .sidebar {
+    width: 200px;
+  }
+
+  .main-container {
+    width: calc(100% - 200px);
+    margin-left: 200px;
+    padding: 10px;
+  }
+
+  .sidebar-brand span {
+    display: none;
+  }
+
+  .content-body {
+    padding: 15px;
+    gap: 15px;
+  }
+
+  .topbar {
+    padding: 12px 16px;
+  }
+
+  .locker-grid-container {
+    grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+    gap: 15px;
+  }
+
+  .card {
+    padding: 15px;
+  }
+
+  .table-responsive {
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+}
+
+@media (max-width: 480px) {
+  .sidebar {
+    transform: translateX(-100%);
+    transition: transform 0.3s ease;
+  }
+
+  .sidebar.active {
+    transform: translateX(0);
+  }
+
+  .main-container {
+    width: 100%;
+    margin-left: 0;
+    padding: 10px;
+  }
+
+  .topbar {
+    flex-wrap: wrap;
+    gap: 10px;
+    padding: 10px;
+  }
+
+  .locker-grid-container {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 10px;
+  }
+
+  .dashboard-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .card {
+    padding: 12px;
+  }
+
+  .card-title {
+    font-size: 16px;
+  }
+}
+.btn-status-mini {
+  padding: 6px 10px;
+  border-radius: 4px;
+  border: none;
+  font-size: 12px;
+  font-weight: bold;
+  cursor: pointer;
+  color: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s ease;
+}
+.btn-status-mini:active {
+  transform: scale(0.95);
+}
+.btn-mini-tersedia {
+  background-color: #10b981;
+}
+
+.btn-mini-booking {
+  background-color: #f59e0b;
+}
+
+.btn-mini-dipakai {
+  background-color: #ef4444;
 }

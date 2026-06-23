@@ -1,0 +1,164 @@
+/* css/riwayat.css */
+
+:root {
+    --bg-page: #f8fafc;
+    --text-main: #0f172a;
+    --text-sub: #64748b;
+    --primary-yellow: #fbc531;
+    --border-card: #e2e8f0;
+}
+
+body {
+    font-family: 'Inter', sans-serif;
+    background-color: var(--bg-page);
+    color: var(--text-main);
+    margin: 0;
+    padding: 20px;
+}
+
+.container {
+    max-width: 600px;
+    margin: 0 auto;
+    padding-bottom: 40px;
+}
+
+.header-section {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 24px;
+}
+
+.btn-back {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 40px;
+    height: 40px;
+    background-color: #ffffff;
+    border: 1px solid var(--border-card);
+    border-radius: 50%;
+    color: var(--text-main);
+    text-decoration: none;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.02);
+    transition: background-color 0.2s;
+}
+
+.btn-back:hover {
+    background-color: #f1f5f9;
+}
+
+.page-title {
+    font-size: 20px;
+    font-weight: 700;
+    margin: 0;
+}
+
+/* ═══════════════ MINI HISTORY CARD ═══════════════ */
+.history-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.history-card {
+    background-color: #ffffff;
+    border: 1px solid var(--border-card);
+    border-radius: 12px;
+    padding: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.01);
+}
+
+.card-left {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+}
+
+.locker-icon-box {
+    width: 46px;
+    height: 46px;
+    background-color: #f1f5f9;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #475569;
+    font-size: 22px;
+    flex-shrink: 0;
+}
+
+.locker-info-meta {
+    display: flex;
+    flex-direction: column;
+}
+
+.locker-code {
+    font-size: 15px;
+    font-weight: 700;
+    color: var(--text-main);
+    margin-bottom: 2px;
+}
+
+.locker-location {
+    font-size: 12px;
+    color: var(--text-sub);
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.locker-date {
+    font-size: 11px;
+    color: #94a3b8;
+    margin-top: 4px;
+}
+
+/* ═══════════════ BADGE STATUS STRIP ═══════════════ */
+.status-badge {
+    font-size: 11px;
+    font-weight: 700;
+    text-transform: uppercase;
+    padding: 4px 10px;
+    border-radius: 6px;
+    text-align: center;
+}
+
+.badge-selesai {
+    background-color: #d1fae5;
+    color: #065f46;
+}
+
+.badge-dibatalkan {
+    background-color: #fee2e2;
+    color: #991b1b;
+}
+
+.badge-expired {
+    background-color: #f1f5f9;
+    color: #475569;
+}
+
+/* Tampilan Jika Riwayat Kosong */
+.empty-history {
+    text-align: center;
+    padding: 40px 20px;
+    background-color: #ffffff;
+    border: 1px solid var(--border-card);
+    border-radius: 16px;
+}
+
+.empty-history i {
+    font-size: 48px;
+    color: #cbd5e1;
+    margin-bottom: 12px;
+}
+
+.empty-history p {
+    font-size: 14px;
+    color: var(--text-sub);
+    margin: 0;
+}

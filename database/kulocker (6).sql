@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Waktu pembuatan: 23 Jun 2026 pada 03.50
+-- Waktu pembuatan: 22 Jun 2026 pada 08.47
 -- Versi server: 10.4.32-MariaDB
 -- Versi PHP: 8.2.12
 
@@ -37,21 +37,6 @@ CREATE TABLE `akses_log` (
   `keterangan` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
---
--- Dumping data untuk tabel `akses_log`
---
-
-INSERT INTO `akses_log` (`id`, `pemesanan_id`, `user_id`, `waktu_akses`, `jenis`, `status`, `keterangan`) VALUES
-(1, 51, 10, '2026-06-22 20:45:28', 'buka', 'berhasil', 'Loker dibuka oleh user'),
-(2, 52, 10, '2026-06-22 20:46:02', 'buka', 'berhasil', 'Loker dibuka oleh user'),
-(3, 52, 10, '2026-06-22 20:46:09', 'tutup', 'berhasil', 'Loker ditutup oleh user'),
-(4, 53, 12, '2026-06-23 00:55:26', 'buka', 'berhasil', 'Loker dibuka oleh user'),
-(5, 53, 12, '2026-06-23 00:55:35', 'tutup', 'berhasil', 'Loker ditutup oleh user'),
-(6, 54, 10, '2026-06-23 01:34:03', 'buka', 'berhasil', 'Loker dibuka oleh user'),
-(7, 54, 10, '2026-06-23 01:35:08', 'tutup', 'berhasil', 'Loker ditutup oleh user'),
-(8, 55, 10, '2026-06-23 01:37:01', 'buka', 'berhasil', 'Loker dibuka oleh user'),
-(9, 55, 10, '2026-06-23 01:37:09', 'tutup', 'berhasil', 'Loker ditutup oleh user');
-
 -- --------------------------------------------------------
 
 --
@@ -68,13 +53,6 @@ CREATE TABLE `keluhan` (
   `status` enum('open','proses','selesai') NOT NULL DEFAULT 'open',
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
---
--- Dumping data untuk tabel `keluhan`
---
-
-INSERT INTO `keluhan` (`id`, `user_id`, `locker_id`, `pemesanan_id`, `judul`, `deskripsi`, `status`, `created_at`) VALUES
-(1, 10, 4, 50, 'Loker rusak', 'Assalamualaikum admin, loker nya rusak abis saya pukul pake laptop', 'open', '2026-06-22 14:47:28');
 
 -- --------------------------------------------------------
 
@@ -102,22 +80,20 @@ CREATE TABLE `lockers` (
   `lokasi` varchar(100) NOT NULL COMMENT 'Contoh: Gedung A Lt.2',
   `ukuran` enum('S','M','L') NOT NULL,
   `status` enum('tersedia','terpakai','rusak') NOT NULL DEFAULT 'tersedia',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
-  `is_deleted` tinyint(1) DEFAULT 0
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 --
 -- Dumping data untuk tabel `lockers`
 --
 
-INSERT INTO `lockers` (`id`, `kode_loker`, `lokasi`, `ukuran`, `status`, `created_at`, `is_deleted`) VALUES
-(1, 'A-01', 'Gedung A Lt.1', 'S', 'tersedia', '2026-06-05 22:52:35', 0),
-(2, 'A-02', 'Gedung A Lt.1', 'S', 'tersedia', '2026-06-05 22:52:35', 0),
-(3, 'A-03', 'Gedung A Lt.1', 'S', 'tersedia', '2026-06-05 22:52:35', 0),
-(4, 'B-01', 'Gedung B Lt.2', 'S', 'rusak', '2026-06-05 22:52:35', 0),
-(5, 'B-02', 'Gedung B Lt.2', 'S', 'rusak', '2026-06-05 22:52:35', 0),
-(6, 'B-03', 'Gedung B Lt.2', 'S', 'tersedia', '2026-06-05 22:52:35', 0),
-(8, 'A-04', 'Gedung A Lt.1', 'S', 'tersedia', '2026-06-23 01:33:32', 0);
+INSERT INTO `lockers` (`id`, `kode_loker`, `lokasi`, `ukuran`, `status`, `created_at`) VALUES
+(1, 'A-01', 'Gedung A Lt.1', 'S', 'terpakai', '2026-06-05 22:52:35'),
+(2, 'A-02', 'Gedung A Lt.1', 'S', 'terpakai', '2026-06-05 22:52:35'),
+(3, 'A-03', 'Gedung A Lt.1', 'S', 'terpakai', '2026-06-05 22:52:35'),
+(4, 'B-01', 'Gedung B Lt.2', 'S', 'tersedia', '2026-06-05 22:52:35'),
+(5, 'B-02', 'Gedung B Lt.2', 'S', 'terpakai', '2026-06-05 22:52:35'),
+(6, 'B-03', 'Gedung B Lt.2', 'S', 'terpakai', '2026-06-05 22:52:35');
 
 -- --------------------------------------------------------
 
@@ -156,19 +132,9 @@ CREATE TABLE `pembayaran` (
 --
 
 INSERT INTO `pembayaran` (`id`, `pemesanan_id`, `jumlah`, `metode`, `status`, `bukti`, `created_at`) VALUES
-(43, 43, 0.00, '', 'lunas', NULL, '2026-06-22 08:18:57'),
-(44, 44, 0.00, '', 'lunas', NULL, '2026-06-22 08:31:42'),
-(45, 45, 0.00, '', 'lunas', NULL, '2026-06-22 08:37:51'),
-(46, 46, 0.00, '', 'lunas', NULL, '2026-06-22 08:43:53'),
-(47, 47, 0.00, '', 'lunas', NULL, '2026-06-22 08:47:16'),
-(48, 48, 0.00, '', 'lunas', NULL, '2026-06-22 08:48:22'),
-(49, 49, 0.00, '', 'lunas', NULL, '2026-06-22 12:40:48'),
-(50, 50, 0.00, '', 'lunas', NULL, '2026-06-22 14:31:24'),
-(51, 51, 0.00, '', 'lunas', NULL, '2026-06-22 15:27:39'),
-(52, 52, 0.00, '', 'lunas', NULL, '2026-06-22 20:45:48'),
-(53, 53, 0.00, '', 'lunas', NULL, '2026-06-23 00:55:04'),
-(54, 54, 0.00, '', 'lunas', NULL, '2026-06-23 01:33:54'),
-(55, 55, 0.00, '', 'lunas', NULL, '2026-06-23 01:36:53');
+(40, 40, 0.00, '', 'lunas', NULL, '2026-06-21 11:37:51'),
+(41, 41, 0.00, '', 'lunas', NULL, '2026-06-21 12:28:18'),
+(42, 42, 0.00, '', 'lunas', NULL, '2026-06-22 05:52:02');
 
 -- --------------------------------------------------------
 
@@ -193,19 +159,9 @@ CREATE TABLE `pemesanan` (
 --
 
 INSERT INTO `pemesanan` (`id`, `user_id`, `locker_id`, `tanggal_mulai`, `tanggal_selesai`, `status`, `kode_akses`, `notifikasi_step`, `created_at`) VALUES
-(43, 10, 4, '2026-06-22 16:18:57', '2026-06-22 17:18:57', 'selesai', '521078', 'terkunci', '2026-06-22 08:18:57'),
-(44, 10, 2, '2026-06-22 16:31:42', '2026-06-22 17:31:42', 'selesai', '540793', 'terkunci', '2026-06-22 08:31:42'),
-(45, 10, 1, '2026-06-22 16:37:51', '2026-06-22 17:37:51', 'selesai', '914854', 'terkunci', '2026-06-22 08:37:51'),
-(46, 10, 3, '2026-06-22 16:43:53', '2026-06-22 17:43:53', 'selesai', '311685', 'terkunci', '2026-06-22 08:43:53'),
-(47, 11, 6, '2026-06-22 16:47:16', '2026-06-22 17:47:16', 'selesai', '277148', 'terkunci', '2026-06-22 08:47:16'),
-(48, 11, 5, '2026-06-22 16:48:22', '2026-06-22 17:07:50', 'selesai', '410381', 'terkunci', '2026-06-22 08:48:22'),
-(49, 10, 2, '2026-06-22 20:40:48', '2026-06-22 21:40:48', 'selesai', '519233', 'terkunci', '2026-06-22 12:40:48'),
-(50, 10, 4, '2026-06-22 22:31:23', '2026-06-22 23:31:23', 'selesai', '973881', 'terkunci', '2026-06-22 14:31:23'),
-(51, 10, 5, '2026-06-22 23:27:39', '2026-06-23 02:27:39', 'selesai', '762803', 'terkunci', '2026-06-22 15:27:39'),
-(52, 10, 1, '2026-06-23 04:45:48', '2026-06-23 04:46:09', 'selesai', '982434', 'belum', '2026-06-22 20:45:48'),
-(53, 12, 6, '2026-06-23 08:55:04', '2026-06-23 08:55:35', 'selesai', '804043', 'belum', '2026-06-23 00:55:04'),
-(54, 10, 8, '2026-06-23 09:33:54', '2026-06-23 09:35:08', 'selesai', '607182', 'belum', '2026-06-23 01:33:54'),
-(55, 10, 8, '2026-06-23 09:36:53', '2026-06-23 09:37:09', 'selesai', '374866', 'belum', '2026-06-23 01:36:53');
+(40, 10, 5, '2026-06-21 00:00:00', '2026-06-21 00:00:00', 'selesai', '541089', 'belum', '2026-06-21 11:37:51'),
+(41, 10, 1, '2026-06-21 20:28:18', '2026-06-21 21:28:18', 'selesai', '504644', 'belum', '2026-06-21 12:28:18'),
+(42, 10, 3, '2026-06-22 13:52:02', '2026-06-22 13:16:55', 'aktif', '371958', '15_menit', '2026-06-22 05:52:02');
 
 -- --------------------------------------------------------
 
@@ -230,9 +186,7 @@ CREATE TABLE `pengumuman` (
 INSERT INTO `pengumuman` (`id`, `judul`, `isi`, `kategori`, `is_aktif`, `created_at`, `expired_at`) VALUES
 (1, 'Selamat Datang di KuLocker!', 'Sistem loker pintar Universitas Mataram kini resmi beroperasi.', 'info', 1, '2026-06-18 09:51:38', NULL),
 (2, 'Promo Juni 2026', 'Perpanjang sewa loker dan dapatkan diskon 20%!', 'promo', 1, '2026-06-18 09:51:38', NULL),
-(3, 'Maintenance Gedung B', 'Loker Gedung B akan maintenance 10 Juni 2026.', 'maintenance', 1, '2026-06-18 09:51:38', NULL),
-(4, 'Locker Bakal hadir di Fakultas Teknik', 'Tunggu kami di fakultas teknik', 'info', 1, '2026-06-23 01:49:35', NULL),
-(5, 'Locker Bakal hadir di Fakultas Teknik', 'Tunggu kami di fakultas teknik', 'info', 1, '2026-06-23 01:50:05', NULL);
+(3, 'Maintenance Gedung B', 'Loker Gedung B akan maintenance 10 Juni 2026.', 'maintenance', 1, '2026-06-18 09:51:38', NULL);
 
 -- --------------------------------------------------------
 
@@ -248,8 +202,6 @@ CREATE TABLE `users` (
   `role` enum('mahasiswa','admin') NOT NULL DEFAULT 'mahasiswa',
   `nim` varchar(20) DEFAULT NULL COMMENT 'Khusus mahasiswa',
   `no_hp` varchar(15) NOT NULL,
-  `alamat` varchar(100) NOT NULL,
-  `foto_profil` longblob DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
@@ -257,11 +209,10 @@ CREATE TABLE `users` (
 -- Dumping data untuk tabel `users`
 --
 
-INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `nim`, `no_hp`, `alamat`, `foto_profil`, `created_at`) VALUES
-(1, 'Admin KuLocker', 'admin@kulocker.ac.id', '$2y$10$exampleHashedPasswordHere', 'admin', NULL, '081234567890', '', '', '2026-06-05 22:52:35'),
-(10, 'Moh. Saqif Dendi Al Fayyed', 'dendi0006@gmail.com', '$2y$10$vTinn2VGFqA.DVzASRKdPOCu9GAUfOl4Yq4HlD.Si5ItuCYEhsjze', 'mahasiswa', 'F1D02410122', '082148192324', 'Kediri', 0x7531305f366133393336316365396336312e6a7067, '2026-06-06 09:02:36'),
-(11, 'Denduy', 'nodichannel@gmail.com', '$2y$10$VJ2YZJE3jzQkVNPWEnJNO.rEYSTrLYoIEeOQnHmaplWOS6MHDSY8q', 'mahasiswa', 'F1D02410001', '', '', 0x7531315f366133393336666263663638302e6a7067, '2026-06-07 01:30:19'),
-(12, 'Raka Mbojo', 'websitekulocker@gmail.com', '$2y$10$e4Xa3iHTQJpi4Q2BcKY3M.7JFvnmxt702iKaUHuY5RS2J5wu6sgJC', 'mahasiswa', 'F1D02410014', '', '', NULL, '2026-06-23 00:54:38');
+INSERT INTO `users` (`id`, `nama`, `email`, `password`, `role`, `nim`, `no_hp`, `created_at`) VALUES
+(1, 'Admin KuLocker', 'admin@kulocker.ac.id', '$2y$10$exampleHashedPasswordHere', 'admin', NULL, '081234567890', '2026-06-05 22:52:35'),
+(10, 'Moh. Saqif Dendi Al Fayyed', 'dendi0006@gmail.com', '$2y$10$PFj6/cKJfPu30t2N7kWkN.kScVc9RP2OwhVtJjUZwY0nkZW9AbrWy', 'mahasiswa', 'F1D02410122', '', '2026-06-06 09:02:36'),
+(11, 'Denduy', 'nodichannel@gmail.com', '$2y$10$VJ2YZJE3jzQkVNPWEnJNO.rEYSTrLYoIEeOQnHmaplWOS6MHDSY8q', 'mahasiswa', 'F1D02410001', '', '2026-06-07 01:30:19');
 
 --
 -- Indexes for dumped tables
@@ -279,7 +230,10 @@ ALTER TABLE `akses_log`
 -- Indeks untuk tabel `keluhan`
 --
 ALTER TABLE `keluhan`
-  ADD PRIMARY KEY (`id`);
+  ADD PRIMARY KEY (`id`),
+  ADD KEY `fk_keluhan_user` (`user_id`),
+  ADD KEY `fk_keluhan_locker` (`locker_id`),
+  ADD KEY `fk_keluhan_pemesanan` (`pemesanan_id`);
 
 --
 -- Indeks untuk tabel `keluhan_response`
@@ -339,13 +293,13 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT untuk tabel `akses_log`
 --
 ALTER TABLE `akses_log`
-  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+  MODIFY `id` bigint(20) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `keluhan`
 --
 ALTER TABLE `keluhan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT untuk tabel `keluhan_response`
@@ -357,7 +311,7 @@ ALTER TABLE `keluhan_response`
 -- AUTO_INCREMENT untuk tabel `lockers`
 --
 ALTER TABLE `lockers`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=9;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT untuk tabel `notifikasi`
@@ -369,25 +323,25 @@ ALTER TABLE `notifikasi`
 -- AUTO_INCREMENT untuk tabel `pembayaran`
 --
 ALTER TABLE `pembayaran`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `pemesanan`
 --
 ALTER TABLE `pemesanan`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=56;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=43;
 
 --
 -- AUTO_INCREMENT untuk tabel `pengumuman`
 --
 ALTER TABLE `pengumuman`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT untuk tabel `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=13;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- Ketidakleluasaan untuk tabel pelimpahan (Dumped Tables)

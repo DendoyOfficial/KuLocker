@@ -1,12 +1,27 @@
 <?php
-session_start();
-$conn = mysqli_connect("localhost", "root", "", "kulocker") or die("Koneksi gagal");
-$id_users = $_SESSION['id_users'] ?? 1;
+require 'config/auth.php';
+require_once 'config/connection.php';
 
-// Helper function
-$getProfil = fn() => mysqli_fetch_assoc(mysqli_query($conn, "SELECT * FROM users WHERE id=$id_users LIMIT 1")) ?: [];
+// 1. Ambil ID dari session 'user'. Pakai ternary buat jaga-jaga kalau bentuknya array/string.
+$id_users = is_array($_SESSION['user']) 
+    ? ($_SESSION['user']['id'] ?? $_SESSION['user']['id_users'] ?? null) 
+    : $_SESSION['user'];
+
+// 2. Proteksi keamanan: Kalau ID kosong, tendang ke sign-in.php (sesuai auth.php)
+if (!$id_users) {
+    header("Location: sign-in.php");
+    exit;
+}
+
+// 3. Helper function untuk ambil data profil pake Prepared Statement (Aman & Akurat)
+$getProfil = function() use ($conn, $id_users) {
+    $stmt = mysqli_prepare($conn, "SELECT * FROM users WHERE id = ? LIMIT 1");
+    mysqli_stmt_bind_param($stmt, "i", $id_users);
+    mysqli_stmt_execute($stmt);
+    return mysqli_fetch_assoc(mysqli_stmt_get_result($stmt)) ?: [];
+};
+
 $h = fn($s) => htmlspecialchars($s ?? '');
-
 $flash = $_SESSION['flash'] ?? null; unset($_SESSION['flash']);
 $stay_edit = false;
 $tab = $_GET['tab'] ?? 'profil';
@@ -47,21 +62,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     } 
     
     if ($aksi === 'password') {
-        $lama = $_POST['pwd_lama']??''; $baru = $_POST['pwd_baru']??''; $konf = $_POST['pwd_konfirm']??'';
+        $lama = $_POST['pwd_lama'] ?? ''; 
+        $baru = $_POST['pwd_baru'] ?? ''; 
+        $konf = $_POST['pwd_konfirm'] ?? '';
         $db = $getProfil();
         
-        if (!$lama || $lama !== $db['password']) $err[] = "Password lama salah.";
-        elseif (strlen($baru) < 8) $err[] = "Minimal 8 karakter.";
-        elseif ($baru === $lama) $err[] = "Sama dengan lama.";
-        elseif ($baru !== $konf) $err[] = "Konfirmasi salah.";
+        // 1. Validasi kecocokan password lama
+        if (!$lama || !password_verify($lama, $db['password'])) {
+            $err[] = "Password lama salah.";
+        }
+        elseif (strlen($baru) < 8) {
+            $err[] = "Minimal 8 karakter.";
+        }
+        elseif ($baru === $lama) {
+            $err[] = "Sama dengan lama.";
+        }
+        elseif ($baru !== $konf) {
+            $err[] = "Konfirmasi salah.";
+        }
 
         if (!$err) {
+            // Amankan password baru menggunakan BCRYPT hash sebelum disimpan
+            $password_terhash = password_hash($baru, PASSWORD_BCRYPT);
+
+            // Gunakan Prepared Statement untuk mengupdate password baru yang sudah di-hash
             $s = mysqli_prepare($conn, "UPDATE users SET password=? WHERE id=?");
-            mysqli_stmt_bind_param($s, "si", $baru, $id_users);
-            $_SESSION['flash'] = mysqli_stmt_execute($s) ? ['ok'=>1,'msg'=>'Password diperbarui.'] : ['ok'=>0,'msg'=>'Gagal.'];
-            header("Location: ?tab=keamanan"); exit;
+            mysqli_stmt_bind_param($s, "si", $password_terhash, $id_users);
+            
+            $_SESSION['flash'] = mysqli_stmt_execute($s) ? ['ok'=>1,'msg'=>'Password berhasil diperbarui (Ter-hash).'] : ['ok'=>0,'msg'=>'Gagal memperbarui password.'];
+            header("Location: ?tab=keamanan"); 
+            exit;
         }
-        $tab = 'keamanan';
+        $stay_edit = true;
     }
     if ($err) $flash = ['ok'=>0, 'msg'=>implode(' ', $err)];
 }
@@ -75,22 +107,24 @@ $inisial = fn($n) => strtoupper(($p=explode(' ',trim($n)))[0][0] . (count($p)>1?
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>KuLocker — Profil</title>
-  <link rel="stylesheet" href="css/profil.css" />
+  <link rel="stylesheet" href="css/profile.css" />
 </head>
 <body>
 <main class="page-wrapper">
-  <!-- Navbar -->
   <header class="navbar">
+    <div class="brand-with-back">
+      <a href="dashboard-utama.php" class="brand-back">
+        <i class="ti ti-arrow-left"></i> Kembali
+      </a>
+    </div>
     <div class="brand"><span class="brand-dot"></span>KuLocker</div>
     <div class="user-pill">Profil Saya</div>
   </header>
 
-  <!-- Flash -->
   <?php if ($flash): ?>
   <div class="flash flash-<?= $flash['ok'] ? 'success' : 'error' ?>"><?= $h($flash['msg']) ?></div>
   <?php endif; ?>
 
-  <!-- Hero -->
   <div class="hero-banner">
     <button id="btnEdit" class="btn-edit <?= ($stay_edit || $tab==='keamanan') ? 'd-none':'' ?>" onclick="setMode(true)">
       <i class="ti ti-edit"></i> Edit Profil
@@ -101,15 +135,14 @@ $inisial = fn($n) => strtoupper(($p=explode(' ',trim($n)))[0][0] . (count($p)>1?
   </div>
 
   <section class="content-grid">
-    <!-- Kiri: Avatar -->
     <aside class="left-panel">
       <div class="avatar-wrap">
         <div class="avatar-circle">
           <img id="avatarImg" src="<?= $profil['foto_profil'] ? 'image/'.$h($profil['foto_profil']) : '' ?>" 
-               <?= !$profil['foto_profil'] ? 'style="display:none"' : '' ?> onerror="this.style.display='none';$('avatarIni').style.display='block'" />
-          <span id="avatarIni" <?= $profil['foto_profil'] ? 'style="display:none"':'' ?>><?= $h($inisial($profil['nama'])) ?></span>
+               <?= !$profil['foto_profil'] ? 'style="display:none"' : '' ?> onerror="this.style.display='none';document.getElementById('avatarIni').style.display='block'" />
+          <span id="avatarIni" <?= $profil['foto_profil'] ? 'style="display:none"':'' ?>><?= $h($inisial($profil['nama'] ?? '')) ?></span>
         </div>
-        <button class="avatar-edit-btn <?= $stay_edit ? '':'d-none' ?>" id="avatarBtn" onclick="$('inputFoto').click()" title="Ganti foto">
+        <button class="avatar-edit-btn <?= $stay_edit ? '':'d-none' ?>" id="avatarBtn" onclick="document.getElementById('inputFoto').click()" title="Ganti foto">
           <i class="ti ti-camera"></i>
         </button>
       </div>
@@ -118,16 +151,13 @@ $inisial = fn($n) => strtoupper(($p=explode(' ',trim($n)))[0][0] . (count($p)>1?
       <p class="avatar-preview-hint d-none" id="fotoHintSide">📷 Foto baru dipilih</p>
     </aside>
 
-    <!-- Kanan: Tabs & Form -->
     <article>
       <div class="form-tabs">
         <div class="tab <?= $tab==='profil' ? 'active':'' ?>" id="tabProfil" onclick="switchTab('profil')">Profil</div>
         <div class="tab <?= $tab==='keamanan' ? 'active':'' ?>" id="tabKeamanan" onclick="switchTab('keamanan')">Keamanan</div>
       </div>
 
-      <!-- Panel Profil -->
       <div id="panelProfil" class="<?= $tab!=='profil' ? 'd-none':'' ?>">
-        <!-- View -->
         <div id="viewMode" class="editor-grid <?= $stay_edit ? 'd-none':'' ?>">
           <?php foreach(['Nama Lengkap'=>'nama','NIM'=>'nim','Alamat'=>'alamat','Email'=>'email','No. HP'=>'no_hp'] as $lbl => $k): ?>
             <div class="form-group <?= $k==='alamat'?'full':'' ?>">
@@ -137,25 +167,24 @@ $inisial = fn($n) => strtoupper(($p=explode(' ',trim($n)))[0][0] . (count($p)>1?
           <?php endforeach; ?>
         </div>
 
-        <!-- Edit -->
         <form id="editMode" class="editor-grid is-form <?= $stay_edit ? '':'d-none' ?>" method="POST" enctype="multipart/form-data">
           <input type="hidden" name="aksi" value="profil" />
           <div class="form-group full">
             <label>Foto Profil</label>
             <input type="file" id="inputFoto" name="foto_baru" accept=".jpg,.jpeg,.png,.gif,.webp" style="display:none" onchange="previewFoto(this)" />
             <div style="display:flex;align-items:center;gap:10px">
-              <button type="button" class="btn-secondary" style="padding:7px 14px;font-size:.82rem" onclick="$('inputFoto').click()">
+              <button type="button" class="btn-secondary" style="padding:7px 14px;font-size:.82rem" onclick="document.getElementById('inputFoto').click()">
                 <i class="ti ti-upload"></i> Pilih Foto
               </button>
               <span class="field-hint" id="fotoHint">JPG, PNG, GIF, WEBP — maks 2 MB</span>
             </div>
           </div>
           
-          <div class="form-group"><label>Nama Lengkap *</label><input type="text" name="nama" required value="<?= $h($profil['nama']) ?>" /></div>
-          <div class="form-group"><label>NIM</label><input type="text" name="nim" value="<?= $h($profil['nim']) ?>" /></div>
-          <div class="form-group full"><label>Alamat</label><textarea name="alamat"><?= $h($profil['alamat']) ?></textarea></div>
-          <div class="form-group"><label>Email</label><input type="email" name="email" value="<?= $h($profil['email']) ?>" /></div>
-          <div class="form-group"><label>No. HP</label><input type="text" name="no_hp" value="<?= $h($profil['no_hp']) ?>" /></div>
+          <div class="form-group"><label>Nama Lengkap *</label><input type="text" name="nama" required value="<?= $h($profil['nama'] ?? '') ?>" /></div>
+          <div class="form-group"><label>NIM</label><input type="text" name="nim" value="<?= $h($profil['nim'] ?? '') ?>" /></div>
+          <div class="form-group full"><label>Alamat</label><textarea name="alamat"><?= $h($profil['alamat'] ?? '') ?></textarea></div>
+          <div class="form-group"><label>Email</label><input type="email" name="email" value="<?= $h($profil['email'] ?? '') ?>" /></div>
+          <div class="form-group"><label>No. HP</label><input type="text" name="no_hp" value="<?= $h($profil['no_hp'] ?? '') ?>" /></div>
 
           <div class="button-group">
             <button type="submit" class="btn-save"><i class="ti ti-device-floppy"></i> Simpan Perubahan</button>
@@ -164,7 +193,6 @@ $inisial = fn($n) => strtoupper(($p=explode(' ',trim($n)))[0][0] . (count($p)>1?
         </form>
       </div>
 
-      <!-- Panel Keamanan -->
       <div id="panelKeamanan" class="<?= $tab!=='keamanan' ? 'd-none':'' ?>">
         <form class="editor-grid is-form" method="POST" onsubmit="return validasiPwd()">
           <input type="hidden" name="aksi" value="password" />
@@ -187,7 +215,6 @@ $inisial = fn($n) => strtoupper(($p=explode(' ',trim($n)))[0][0] . (count($p)>1?
             </div>
           <?php endforeach; ?>
 
-          <!-- Indikator Kekuatan -->
           <div class="form-group full" id="kekuatanWrap" style="display:none">
             <label>Kekuatan password</label>
             <div style="height:5px;border-radius:3px;background:#E5E7EB;overflow:hidden;margin-top:3px">
@@ -206,6 +233,6 @@ $inisial = fn($n) => strtoupper(($p=explode(' ',trim($n)))[0][0] . (count($p)>1?
   </section>
 </main>
 
-<script src="js/profil.js"></script>
+<script src="js/profile.js"></script>
 </body>
 </html>

@@ -1,4 +1,5 @@
 const $ = (id) => document.getElementById(id);
+
 const setErr = (id, msg) => {
   let e = $("err-" + id);
   if (e) {
@@ -6,6 +7,7 @@ const setErr = (id, msg) => {
     e.textContent = msg;
   }
 };
+
 const clearErr = (id) => {
   let e = $(id);
   if (e) e.textContent = "";
@@ -100,6 +102,7 @@ const validasiPwd = () => {
     l = $("pwd-lama").value.trim(),
     b = $("pwd-baru").value,
     k = $("pwd-konfirm").value;
+    
   if (!l) {
     setErr("lama", "Wajib diisi.");
     ok = false;

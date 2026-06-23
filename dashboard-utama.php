@@ -2,9 +2,18 @@
 require 'config/auth.php';
 require_once 'config/connection.php';
 
-
+if (isset($_SESSION['user']['role']) && $_SESSION['user']['role'] === 'admin') {
+    header('Location: admin.php?page=dashboard');
+    exit;
+}
 
 $user = $_SESSION['user'];
+if (empty($user['foto_profil']) && !empty($user['id'])) {
+    $user_foto_row = mysqli_fetch_assoc(mysqli_query($conn, "SELECT foto_profil FROM users WHERE id = " . intval($user['id']) . " LIMIT 1"));
+    if ($user_foto_row && !empty($user_foto_row['foto_profil'])) {
+        $user['foto_profil'] = $user_foto_row['foto_profil'];
+    }
+}
 
 $user_id = $user['id'];
 
@@ -15,6 +24,7 @@ $res_lok = mysqli_query($conn, "
            COUNT(*) AS total,
            SUM(status = 'tersedia') AS tersedia
     FROM lockers
+    WHERE (is_deleted = 0 OR is_deleted IS NULL)
     GROUP BY lokasi
     ORDER BY lokasi ASC
 ");
@@ -75,15 +85,17 @@ function pengumuman_meta($kategori) {
             <div class="user-trigger" onclick="toggleDropdown(event)">
                 <span class="user-name"><?= htmlspecialchars($user['nama']) ?></span>
                 <div class="profil">
-                    <img src="img/profl.png" alt="user">
+                    <?php if (!empty($user['foto_profil'])): ?>
+                        <img src="image/<?= htmlspecialchars($user['foto_profil']) ?>" alt="user">
+                    <?php else: ?>
+                        <img src="img/profl.png" alt="user">
+                    <?php endif; ?>
                 </div>
             </div>
 
             <div class="dropdown-menu" id="dropdownMenu">
-                <a href="profil.php"><i class="ti ti-user"></i> Profil Page</a>
-                <a href="settings.php"><i class="ti ti-settings"></i> Settings</a>
-                <a href="keluhan.php"><i class="ti ti-message-report"></i> Keluhan</a>
-                <a href="#faq"><i class="ti ti-help-circle"></i> Bantuan</a>
+                <a href="profile.php"><i class="ti ti-user"></i> Profil Page</a>
+                <a href="keluhan.php"><i class="ti ti-message-report"></i> Keluhan & Saran</a>
                 <hr class="dropdown-divider">
                 <a href="config/logout.php" class="logout-link"><i class="ti ti-logout"></i> Logout</a>
             </div>
@@ -139,7 +151,7 @@ function pengumuman_meta($kategori) {
   <div class="feature-section-inner">
     <div class="feature-label">FITUR UTAMA</div>
     <div class="feature-grid">
-        <a href="my-loker.php" class="feature-btn">
+        <a href="tiket-saya.php" class="feature-btn">
             <div class="feature-icon gold"><i class="ti ti-layout-grid"></i></div>
             <div class="feature-name">My Locker</div>
             <div class="feature-desc">Status loker aktif & QR Code pemesanan</div>
@@ -149,15 +161,10 @@ function pengumuman_meta($kategori) {
             <div class="feature-name">Pesan Loker</div>
             <div class="feature-desc">Temukan loker terdekat via peta</div>
         </div>
-        <a href="riwayat.php" class="feature-btn">
+        <a href="riwayat-sewa.php" class="feature-btn">
             <div class="feature-icon green"><i class="ti ti-history"></i></div>
             <div class="feature-name">Riwayat</div>
             <div class="feature-desc">Riwayat penyimpanan loker kamu</div>
-        </a>
-        <a href="notifikasi.php" class="feature-btn">
-            <div class="feature-icon red"><i class="ti ti-bell"></i></div>
-            <div class="feature-name">Notifikasi</div>
-            <div class="feature-desc">Pantau status dan pengingat sewa</div>
         </a>
     </div>
   </div>
@@ -262,6 +269,7 @@ function pengumuman_meta($kategori) {
     </div>
 </div>
 
+<iframe src="api/cron-pengingat.php" style="display:none; width:0; height:0; border:none;"></iframe>
 
 <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"
         integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV/XN/pnHo=" crossorigin=""></script>

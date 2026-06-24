@@ -21,8 +21,9 @@ TECHSTACK USING :
 2. JAVASCRIPT
 3. CSS
 4. TAILWIND CSS
-5. PHP
-6. XAMPP/SQL
+5. JSON
+6. PHP
+7. XAMPP/SQL
 
 DBMS
 - konfigurasi KuLocker berbasis client server sederhana dengan fokus pada akses digital, keamanan, dan manajemen data loker.

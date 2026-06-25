@@ -70,3 +70,19 @@ SITE MAP
 - Informasi Akun
 - Edit Profil
 - Ubah Password
+
+
+TAMPILAN UI:
+
+<img width="1898" height="910" alt="Screenshot 2026-06-21 193247" src="https://github.com/user-attachments/assets/079755eb-d7f0-4bad-a102-0d1e4d1e8d79" />
+
+
+<img width="1918" height="910" alt="Screenshot 2026-06-21 193709" src="https://github.com/user-attachments/assets/25de6e38-132c-4b0d-b4f6-a2b0149f3959" />
+
+<img width="1917" height="907" alt="Screenshot 2026-06-21 192834" src="https://github.com/user-attachments/assets/27f73ad6-6c0f-4fcb-ae89-c5fab3d064d3" />
+
+
+
+
+
+
